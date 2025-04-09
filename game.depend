@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1744126500 source:c:\sdl2\game\main.cpp
+	<iostream>
+	"Game.h"
+
+1744161946 c:\sdl2\game\include\game.h
+	<SDL.h>
+	<iostream>
+
+1744161946 source:c:\sdl2\game\src\game.cpp
+	"Game.h"
+

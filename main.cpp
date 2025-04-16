@@ -1,7 +1,7 @@
-#include<iostream>
-using namespace std;
+#include <iostream>
 #include "Game.h"
-int main(int argc, char* argv[]){
+
+int main(int argc, char* argv[]) {
     Game game;
     if (game.running) {
         game.run();

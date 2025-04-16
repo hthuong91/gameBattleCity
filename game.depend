@@ -1,12 +1,37 @@
 # depslib dependency file v1.0
-1744126500 source:c:\sdl2\game\main.cpp
+1744820028 source:c:\sdl2\game\main.cpp
 	<iostream>
 	"Game.h"
 
-1744161946 c:\sdl2\game\include\game.h
+1744820028 c:\sdl2\game\include\game.h
 	<SDL.h>
 	<iostream>
+	<vector>
+	"Wall.h"
 
-1744762889 source:c:\sdl2\game\src\game.cpp
+1744819671 source:c:\sdl2\game\src\game.cpp
+	"Game.h"
+
+1744818283 source:c:\sdl2\game\src\wall.cpp
+	"Wall.h"
+	"Game.h"
+
+1744818245 c:\sdl2\game\include\wall.h
+	<SDL.h>
+
+1744821054 c:\sdl2\game\game.h
+	<SDL.h>
+	<iostream>
+	<vector>
+	"Wall.h"
+
+1744821054 c:\sdl2\game\wall.h
+	<SDL.h>
+
+1744821054 source:c:\sdl2\game\game.cpp
+	"Game.h"
+
+1744821054 source:c:\sdl2\game\wall.cpp
+	"Wall.h"
 	"Game.h"
 

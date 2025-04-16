@@ -39,7 +39,7 @@ void Game::render()
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     for (int i=1; i< MAP_HEIGHT - 1; i++) {
-        for (int j=1; j<MAP_WIDTH-1; j++) {
+        for (int j=1; j< MAP_WIDTH -1; j++) {
             SDL_Rect tile = {j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE };
             SDL_RenderFillRect(renderer, &tile);
         }

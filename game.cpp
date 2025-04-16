@@ -26,7 +26,7 @@ Game::Game()
 
 }
 void Game::generateWalls() {
-    for (int i = 3; i < MAP_HEIGHT - 3; i += 20) {
+    for (int i = 3; i < MAP_HEIGHT - 3; i += 2) {
         for (int j = 3; j < MAP_WIDTH - 3; j += 2) {
             wall w(j * TILE_SIZE, i * TILE_SIZE);
             walls.push_back(w);
@@ -35,8 +35,8 @@ void Game::generateWalls() {
 }
 void Game::render()
 {
-    SDL_SetRenderDrawColor(renderer, 128, 128, 128, 255); // ranh gi?i
-    SDL_RenderClear(renderer); // xóa màu
+    SDL_SetRenderDrawColor(renderer, 128, 128, 128, 255);
+    SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     for (int i=1; i< MAP_HEIGHT - 1; i++) {
         for (int j=1; j<MAP_WIDTH-1; j++) {

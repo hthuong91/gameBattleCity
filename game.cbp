@@ -14,6 +14,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="include" />
+					<Add directory="./" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -24,6 +25,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="include" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -34,11 +36,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/game.h" />
-		<Unit filename="include/wall.h" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/game.cpp" />
-		<Unit filename="src/wall.cpp" />
+		<Unit filename="wall.cpp" />
+		<Unit filename="wall.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

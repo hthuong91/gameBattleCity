@@ -19,19 +19,28 @@
 1744818245 c:\sdl2\game\include\wall.h
 	<SDL.h>
 
-1744822637 c:\sdl2\game\game.h
+1744928494 c:\sdl2\game\game.h
 	<SDL.h>
 	<iostream>
 	<vector>
 	"Wall.h"
+	"Playertank.h"
 
 1744822637 c:\sdl2\game\wall.h
 	<SDL.h>
 
-1744823581 source:c:\sdl2\game\game.cpp
-	"Game.h"
+1744928886 source:c:\sdl2\game\game.cpp
+	"game.h"
 
 1744823152 source:c:\sdl2\game\wall.cpp
 	"Wall.h"
 	"Game.h"
+
+1744830462 source:c:\sdl2\game\playertank.cpp
+	"playertank.h"
+
+1744929531 c:\sdl2\game\playertank.h
+	<SDL.h>
+	<vector>
+	"Wall.h"
 

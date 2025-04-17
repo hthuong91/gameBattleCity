@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "game.h"
 using namespace std;
 
 Game::Game()
@@ -23,6 +23,7 @@ Game::Game()
         running = false;
     }
     generateWalls();
+    player = playertank(((MAP_WIDTH - 1 )/2)* TILE_SIZE, (MAP_HEIGHT - 2) * TILE_SIZE);
 
 }
 void Game::generateWalls() {
@@ -47,16 +48,36 @@ void Game::render()
     for (size_t i = 0; i < walls.size(); i++) {
         walls[i].render(renderer);
     }
+    player.render(renderer);
+
     SDL_RenderPresent(renderer);
+}
+void Game::handlEvents() {
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            running = false;
+        }
+        else if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
+                case SDLK_UP: player.move(0, -5, walls); break;
+                case SDLK_DOWN: player.move(0, 5, walls); break;
+                case SDLK_LEFT: player.move(-5, 0, walls); break;
+                case SDLK_RIGHT: player.move(5, 0, walls); break;
+            }
+        }
+    }
 }
 
 void Game::run()
 {
     while (running) {
+        handlEvents();
         render();
         SDL_Delay(16);
     }
 }
+
 
 Game::~Game()
 {

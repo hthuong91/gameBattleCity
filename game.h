@@ -1,11 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
-
+using namespace std;
 #include <SDL.h>
 #include <iostream>
 #include <vector>
 #include "Wall.h"
-#include "Playertank.h"
+#include "playertank.h"
+
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -19,13 +20,14 @@ public:
     SDL_Window* window;
     SDL_Renderer* renderer;
     bool running;
-    std::vector<wall> walls;
+    vector<wall> walls;
     playertank player;
     Game();
     void generateWalls();
     void render();
     void run();
-    void handlEvents();
+    void handleEvents();
+    void update();
     ~Game();
 };
 

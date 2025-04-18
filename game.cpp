@@ -53,7 +53,7 @@ void Game::render()
 
     SDL_RenderPresent(renderer);
 }
-void Game::handlEvents() {
+void Game::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
@@ -65,6 +65,19 @@ void Game::handlEvents() {
                 case SDLK_DOWN: player.move(0, 5, walls); break;
                 case SDLK_LEFT: player.move(-5, 0, walls); break;
                 case SDLK_RIGHT: player.move(5, 0, walls); break;
+                case SDLK_SPACE: player.shoot(); break;
+            }
+        }
+    }
+}
+void Game::update() {
+    player.updateBullets();
+    for (auto& bullet : player.bullets) {
+        for (auto&wall : walls) {
+            if (wall.active && SDL_HasIntersection(&bullet.rect, &wall.rect)) {
+                wall.active = false;
+                bullet.active = false;
+                break;
             }
         }
     }
@@ -73,7 +86,8 @@ void Game::handlEvents() {
 void Game::run()
 {
     while (running) {
-        handlEvents();
+        handleEvents();
+        update();
         render();
         SDL_Delay(16);
     }

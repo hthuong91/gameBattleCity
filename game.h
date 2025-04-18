@@ -21,7 +21,6 @@ public:
     bool running;
     std::vector<wall> walls;
     playertank player;
-
     Game();
     void generateWalls();
     void render();

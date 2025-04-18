@@ -2,6 +2,7 @@
 using namespace std;
 
 Game::Game()
+: player(((MAP_WIDTH - 1) / 2) * TILE_SIZE, (MAP_HEIGHT - 2) * TILE_SIZE)
 {
     running = true;
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {

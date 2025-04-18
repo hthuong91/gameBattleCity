@@ -8,7 +8,6 @@ playertank::playertank(int startX, int startY) {
     dirX = 0;
     dirY = -1;
 }
-
 void playertank::move(int dx, int dy, const std::vector<wall>& walls) {
     int newX = x + dx;
     int newY = y + dy;

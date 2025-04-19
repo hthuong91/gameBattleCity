@@ -6,7 +6,7 @@ using namespace std;
 #include <vector>
 #include "Wall.h"
 #include "playertank.h"
-
+#include "enemytank.h"
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
@@ -22,12 +22,15 @@ public:
     bool running;
     vector<wall> walls;
     playertank player;
+    int enemyNumber = 3;
+    vector<enemytank> enemies;
     Game();
     void generateWalls();
     void render();
     void run();
     void handleEvents();
     void update();
+    void spawnenemies();
     ~Game();
 };
 

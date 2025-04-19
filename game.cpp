@@ -25,7 +25,7 @@ Game::Game()
     }
     generateWalls();
     player = playertank(((MAP_WIDTH - 1 )/2)* TILE_SIZE, (MAP_HEIGHT - 2) * TILE_SIZE);
-
+    spawnenemies();
 }
 void Game::generateWalls() {
     for (int i = 3; i < MAP_HEIGHT - 3; i += 2) {
@@ -50,6 +50,9 @@ void Game::render()
         walls[i].render(renderer);
     }
     player.render(renderer);
+    for (auto &enemy : enemies) {
+        enemy.render(renderer);
+    }
 
     SDL_RenderPresent(renderer);
 }
@@ -72,14 +75,39 @@ void Game::handleEvents() {
 }
 void Game::update() {
     player.updateBullets();
-    for (auto& bullet : player.bullets) {
-        for (auto&wall : walls) {
-            if (wall.active && SDL_HasIntersection(&bullet.rect, &wall.rect)) {
-                wall.active = false;
-                bullet.active = false;
-                break;
+    for (auto& enemy : enemies) {
+        enemy.move(walls);
+        enemy.updateBullets();
+        if (rand()% 100 < 2) {
+            enemy.shoot();
+        }
+    }
+    for (auto& enemy : enemies) {
+        for (auto& bullet : enemy.bullets) {
+            if (SDL_HasIntersection(&bullet.rect, &player.rect)) {
+                running = false;
+                return ;
             }
         }
+    }
+}
+void Game::spawnenemies() {
+    enemies.clear();
+    for (int i= 0; i < enemyNumber; i++) {
+        int ex, ey;
+        bool validPosition = false;
+        while (!validPosition) {
+            ex = (rand() % (MAP_WIDTH -2) +1) *TILE_SIZE;
+            ey = (rand() % (MAP_HEIGHT - 2) +1) *TILE_SIZE;
+            validPosition = true;
+            for (const auto& wall : walls) {
+                if (wall.active && wall.x == ex && wall.y == ey) {
+                    validPosition = false;
+                    break;
+                }
+            }
+        }
+        enemies.push_back(enemytank(ex, ey));
     }
 }
 

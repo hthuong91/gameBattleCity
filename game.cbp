@@ -38,6 +38,8 @@
 		</Compiler>
 		<Unit filename="bullet.cpp" />
 		<Unit filename="bullet.h" />
+		<Unit filename="enemytank.cpp" />
+		<Unit filename="enemytank.h" />
 		<Unit filename="game.cpp" />
 		<Unit filename="game.h" />
 		<Unit filename="main.cpp" />

@@ -1,6 +1,7 @@
 #include "enemytank.h"
+#include "bullet.h"
+#include "game.h"
 using namespace std;
-
 
 enemytank::enemytank(int startX, int startY)
 {
@@ -9,17 +10,17 @@ enemytank::enemytank(int startX, int startY)
     x = startX;
     y = startY;
     rect = {x, y, TILE_SIZE, TILE_SIZE};
-    dir = 0;
-    dir = 1;
+    dirX = 0;
+    dirY = 1;
     active = true;
 }
 void enemytank::move(const vector<wall>& walls) {
     if (--moveDelay > 0) return;
-    moveDay = 15;
-    int r - rand() % 4;
+    moveDelay = 15;
+    int r = rand() % 4;
     if (r == 0) {
         this->dirX = 0;
-        this->dirY = 5
+        this->dirY = 5;
     }
     else if (r == 1) {
         this -> dirX = 0;
@@ -36,12 +37,12 @@ void enemytank::move(const vector<wall>& walls) {
     int newX = x + this->dirX;
     int newY = y + this->dirY;
     SDL_Rect newRect = {newX, newY, TILE_SIZE, TILE_SIZE};
-    for (const auto& wall :: walls) {
+    for (const auto& wall : walls) {
         if (wall.active &&SDL_HasIntersection(&newRect, &wall.rect)) {
             return;
         }
     }
-    if (newX >= TILE_SIZE && newX <= SCREEN_WIDTH - TILE_SIZE *2) &&
+    if (newX >= TILE_SIZE && newX <= SCREEN_WIDTH - TILE_SIZE *2 &&
         newY >= TILE_SIZE && newY <= SCREEN_HEIGHT - TILE_SIZE *2) {
         x = newX;
         y = newY;
@@ -49,19 +50,26 @@ void enemytank::move(const vector<wall>& walls) {
         rect.y = y;
     }
 }
-void shoot() {
+void enemytank::shoot() {
     if (--shootDelay > 0) return;
     shootDelay =5;
     bullets.push_back(bullet(x + TILE_SIZE /2 -5, y + TILE_SIZE /2 -5,
                              this->dirX, this->dirY));
 }
-void updateBullets() {
+void enemytank::updateBullets() {
     for (auto &bullet : bullets) {
         bullet.move();
     }
-    bullets.erase(remove_if (bullets.begin(),bullets.end()))
+    bullets.erase(remove_if (bullets.begin(),bullets.end(),
+                             [] (bullet &b) {return !b.active;}),bullets.end() );
 }
-
+void enemytank::render(SDL_Renderer* renderer) {
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderFillRect (renderer, &rect);
+    for (auto &bullet : bullets) {
+        bullet.render(renderer);
+    }
+}
 
 
 

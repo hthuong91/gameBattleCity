@@ -19,17 +19,18 @@
 1744818245 c:\sdl2\game\include\wall.h
 	<SDL.h>
 
-1744979216 c:\sdl2\game\game.h
+1745076797 c:\sdl2\game\game.h
 	<SDL.h>
 	<iostream>
 	<vector>
 	"Wall.h"
 	"playertank.h"
+	"enemytank.h"
 
 1744822637 c:\sdl2\game\wall.h
 	<SDL.h>
 
-1744973601 source:c:\sdl2\game\game.cpp
+1745077255 source:c:\sdl2\game\game.cpp
 	"game.h"
 
 1744823152 source:c:\sdl2\game\wall.cpp
@@ -48,11 +49,22 @@
 	"Wall.h"
 	"bullet.h"
 
-1744979969 c:\sdl2\game\bullet.h
+1745075011 c:\sdl2\game\bullet.h
 	<SDL.h>
 	<vector>
 
 1744973886 source:c:\sdl2\game\bullet.cpp
+	"bullet.h"
+	"game.h"
+
+1745075264 c:\sdl2\game\enemytank.h
+	<SDL.h>
+	<vector>
+	"bullet.h"
+	"wall.h"
+
+1745076606 source:c:\sdl2\game\enemytank.cpp
+	"enemytank.h"
 	"bullet.h"
 	"game.h"
 

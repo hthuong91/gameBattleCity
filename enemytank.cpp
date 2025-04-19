@@ -1,0 +1,88 @@
+#include "enemytank.h"
+using namespace std;
+
+
+enemytank::enemytank(int startX, int startY)
+{
+    moveDelay = 15;
+    shootDelay =5;
+    x = startX;
+    y = startY;
+    rect = {x, y, TILE_SIZE, TILE_SIZE};
+    dir = 0;
+    dir = 1;
+    active = true;
+}
+void enemytank::move(const vector<wall>& walls) {
+    if (--moveDelay > 0) return;
+    moveDay = 15;
+    int r - rand() % 4;
+    if (r == 0) {
+        this->dirX = 0;
+        this->dirY = 5
+    }
+    else if (r == 1) {
+        this -> dirX = 0;
+        this -> dirY = 5;
+    }
+    else if (r==2) {
+        this-> dirY = 0;
+        this -> dirX =-5;
+    }
+    else if (r==3) {
+        this ->dirY = 0;
+        this-> dirX = 5;
+    }
+    int newX = x + this->dirX;
+    int newY = y + this->dirY;
+    SDL_Rect newRect = {newX, newY, TILE_SIZE, TILE_SIZE};
+    for (const auto& wall :: walls) {
+        if (wall.active &&SDL_HasIntersection(&newRect, &wall.rect)) {
+            return;
+        }
+    }
+    if (newX >= TILE_SIZE && newX <= SCREEN_WIDTH - TILE_SIZE *2) &&
+        newY >= TILE_SIZE && newY <= SCREEN_HEIGHT - TILE_SIZE *2) {
+        x = newX;
+        y = newY;
+        rect.x = x;
+        rect.y = y;
+    }
+}
+void shoot() {
+    if (--shootDelay > 0) return;
+    shootDelay =5;
+    bullets.push_back(bullet(x + TILE_SIZE /2 -5, y + TILE_SIZE /2 -5,
+                             this->dirX, this->dirY));
+}
+void updateBullets() {
+    for (auto &bullet : bullets) {
+        bullet.move();
+    }
+    bullets.erase(remove_if (bullets.begin(),bullets.end()))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

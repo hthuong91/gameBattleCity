@@ -1,10 +1,7 @@
-#include <iostream>
 #include "Game.h"
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* args[]) {
     Game game;
-    if (game.running) {
-        game.run();
-    }
+    game.run();
     return 0;
 }

@@ -1,6 +1,5 @@
 # depslib dependency file v1.0
-1744822375 source:c:\sdl2\game\main.cpp
-	<iostream>
+1745204664 source:c:\sdl2\game\main.cpp
 	"Game.h"
 
 1744820028 c:\sdl2\game\include\game.h
@@ -19,7 +18,7 @@
 1744818245 c:\sdl2\game\include\wall.h
 	<SDL.h>
 
-1745076797 c:\sdl2\game\game.h
+1745210330 c:\sdl2\game\game.h
 	<SDL.h>
 	<iostream>
 	<vector>
@@ -30,7 +29,7 @@
 1744822637 c:\sdl2\game\wall.h
 	<SDL.h>
 
-1745077255 source:c:\sdl2\game\game.cpp
+1745209496 source:c:\sdl2\game\game.cpp
 	"game.h"
 
 1744823152 source:c:\sdl2\game\wall.cpp

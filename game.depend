@@ -30,14 +30,14 @@
 1745229524 c:\sdl2\game\wall.h
 	<SDL.h>
 
-1745229214 source:c:\sdl2\game\game.cpp
+1745229524 source:c:\sdl2\game\game.cpp
 	"game.h"
 
-1744823152 source:c:\sdl2\game\wall.cpp
+1745229524 source:c:\sdl2\game\wall.cpp
 	"Wall.h"
 	"Game.h"
 
-1745227948 source:c:\sdl2\game\playertank.cpp
+1745229524 source:c:\sdl2\game\playertank.cpp
 	"playertank.h"
 	"game.h"
 	"bullet.h"
@@ -53,11 +53,9 @@
 	<SDL.h>
 	<vector>
 
-1745229267 source:c:\sdl2\game\bullet.cpp
+1745229524 source:c:\sdl2\game\bullet.cpp
 	"bullet.h"
 	"game.h"
-	"wall.h"
-	<vector>
 
 1745229524 c:\sdl2\game\enemytank.h
 	<SDL.h>
@@ -65,11 +63,10 @@
 	"bullet.h"
 	"wall.h"
 
-1745227948 source:c:\sdl2\game\enemytank.cpp
+1745229524 source:c:\sdl2\game\enemytank.cpp
 	"enemytank.h"
 	"bullet.h"
 	"game.h"
-	<algorithm>
 
 1745222576 source:c:\sdl2\game\texture.cpp
 	"Texture.h"

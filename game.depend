@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1745204664 source:c:\sdl2\game\main.cpp
+1745224152 source:c:\sdl2\game\main.cpp
 	"Game.h"
+	<SDL.h>
 
 1744820028 c:\sdl2\game\include\game.h
 	<SDL.h>
@@ -18,7 +19,7 @@
 1744818245 c:\sdl2\game\include\wall.h
 	<SDL.h>
 
-1745210330 c:\sdl2\game\game.h
+1745229524 c:\sdl2\game\game.h
 	<SDL.h>
 	<iostream>
 	<vector>
@@ -26,44 +27,55 @@
 	"playertank.h"
 	"enemytank.h"
 
-1744822637 c:\sdl2\game\wall.h
+1745229524 c:\sdl2\game\wall.h
 	<SDL.h>
 
-1745209496 source:c:\sdl2\game\game.cpp
+1745229214 source:c:\sdl2\game\game.cpp
 	"game.h"
 
 1744823152 source:c:\sdl2\game\wall.cpp
 	"Wall.h"
 	"Game.h"
 
-1744979347 source:c:\sdl2\game\playertank.cpp
+1745227948 source:c:\sdl2\game\playertank.cpp
 	"playertank.h"
 	"game.h"
 	"bullet.h"
 
-1744980067 c:\sdl2\game\playertank.h
+1745229524 c:\sdl2\game\playertank.h
 	<algorithm>
 	<SDL.h>
 	<vector>
 	"Wall.h"
 	"bullet.h"
 
-1745075011 c:\sdl2\game\bullet.h
+1745229524 c:\sdl2\game\bullet.h
 	<SDL.h>
 	<vector>
 
-1744973886 source:c:\sdl2\game\bullet.cpp
+1745229267 source:c:\sdl2\game\bullet.cpp
 	"bullet.h"
 	"game.h"
+	"wall.h"
+	<vector>
 
-1745075264 c:\sdl2\game\enemytank.h
+1745229524 c:\sdl2\game\enemytank.h
 	<SDL.h>
 	<vector>
 	"bullet.h"
 	"wall.h"
 
-1745076606 source:c:\sdl2\game\enemytank.cpp
+1745227948 source:c:\sdl2\game\enemytank.cpp
 	"enemytank.h"
 	"bullet.h"
 	"game.h"
+	<algorithm>
+
+1745222576 source:c:\sdl2\game\texture.cpp
+	"Texture.h"
+
+1745222551 c:\sdl2\game\texture.h
+	<SDL.h>
+	<SDL_image.h>
+	<string>
 

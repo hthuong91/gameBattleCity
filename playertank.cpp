@@ -49,14 +49,3 @@ void playertank::updateBullets() {
     bullets.erase(remove_if(bullets.begin(),bullets.end(),
                                  [](bullet &b) {return !b.active;}), bullets.end());
 }
-
-
-
-
-
-
-
-
-
-
-

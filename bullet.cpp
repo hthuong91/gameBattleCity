@@ -1,3 +1,4 @@
+
 #include "bullet.h"
 #include "game.h"
 bullet::bullet(int startX, int startY, int dirX, int dirY)
@@ -25,4 +26,3 @@ void bullet::render (SDL_Renderer* renderer) {
         SDL_RenderFillRect (renderer, &rect);
     }
 }
-

@@ -1,3 +1,4 @@
+
 #include "enemytank.h"
 #include "bullet.h"
 #include "game.h"
@@ -70,27 +71,3 @@ void enemytank::render(SDL_Renderer* renderer) {
         bullet.render(renderer);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

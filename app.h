@@ -15,4 +15,4 @@ class App
         SDL_Window* m_window;
 };
 
-#endif  APP_H
+#endif  //APP_H

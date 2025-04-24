@@ -27,8 +27,8 @@ void App::run()
 
     if(SDL_Init(SDL_INIT_VIDEO) == 0)
     {
-        m_window = SDL_CreateWindow("TANKS", SDl_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                    AppConfig::windows_rect.w, AppCOnfig::windows_rect.h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+        m_window = SDL_CreateWindow("TANKS", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                    AppConfig::windows_rect.w, AppConfig::windows_rect.h, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
         if(m_window == nullptr) return;
         if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) return;
         if(TTF_Init() == -1) return ;

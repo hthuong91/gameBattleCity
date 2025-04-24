@@ -1,55 +1,22 @@
+#ifndef APPSTATE_H
+#define APPSTATE_H
 
-#include "engine.h"
+#include <SDL_events.h>
+#include <string>
 
-
-Engine::Engine()
+class AppState
 {
-    m_renderer = nullptr;
-    m_sprite_config = nullptr;
-}
+public:
+    virtual ~AppState() {}
 
-Engine &Engine::getEngine()
-{
-    static Engine engine;
-    return engine;
-}
+    virtual bool finished() const = 0;
 
-std::string Engine::intToString(int num)
-{
-    if(num == 0) return "0";
+    virtual void draw() = 0;
 
-    std::string buf;
-    bool negative = false;
-    if(num < 0)
-    {
-        negative = true;
-        num = -num;
-    }
-    for(; num; num /= 10) buf = "0123456789abcdef"[num % 10] + buf;
-    if(negative) buf = "-" + buf;
-    return buf;
-}
+    virtual void update(Uint32 dt) = 0;
 
-void Engine::initModules()
-{
-    m_renderer = new Renderer;
-    m_sprite_config = new SpriteConfig;
-}
+    virtual void eventProcess(SDL_Event* ev) = 0;
 
-void Engine::destroyModules()
-{
-    delete m_renderer;
-    m_renderer = nullptr;
-    delete m_sprite_config;
-    m_sprite_config = nullptr;
-}
-
-Renderer *Engine::getRenderer() const
-{
-    return m_renderer;
-}
-
-SpriteConfig *Engine::getSpriteConfig() const
-{
-    return m_sprite_config;
-}
+    virtual AppState* nextState() = 0;
+};
+#endif // APPSTATE_H

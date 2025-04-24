@@ -1,6 +1,6 @@
 #ifndef APP_H
 #define APP_H
-#include
+#include "appstate.h"
 
 class App
 {
@@ -15,4 +15,4 @@ class App
         SDL_Window* m_window;
 };
 
-#endif // APP_H
+#endif  APP_H

@@ -1,6 +1,6 @@
 # depslib dependency file v1.0
-1745224152 source:c:\sdl2\game\main.cpp
-	"Game.h"
+1745481708 source:c:\sdl2\game\main.cpp
+	"app.h"
 	<SDL.h>
 
 1744820028 c:\sdl2\game\include\game.h
@@ -75,4 +75,6 @@
 	<SDL.h>
 	<SDL_image.h>
 	<string>
+
+1745483361 c:\sdl2\game\app.h
 

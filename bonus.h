@@ -14,7 +14,6 @@ public:
     void draw();
 
     void update(Uint32 dt);
-private:
 
     Uint32 m_bonus_show_time;
 

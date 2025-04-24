@@ -76,5 +76,18 @@
 	<SDL_image.h>
 	<string>
 
-1745483361 c:\sdl2\game\app.h
+1745483411 c:\sdl2\game\app.h
+	"appstate.h"
+
+1745506744 c:\sdl2\game\appstate.h
+	"engine.h"
+
+1745506658 c:\sdl2\game\engine.h
+	"renderer.h"
+	"spriteconfig.h"
+
+1745506946 c:\sdl2\game\renderer.h
+	<SDL.h>
+	<SDL_ttf.h>
+	<string>
 

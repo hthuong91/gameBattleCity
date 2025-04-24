@@ -19,19 +19,34 @@
 1744818245 c:\sdl2\game\include\wall.h
 	<SDL.h>
 
-1745229524 c:\sdl2\game\game.h
-	<SDL.h>
-	<iostream>
+1745523971 c:\sdl2\game\game.h
+	"appstate.h"
+	"object.h"
+	"player.h"
+	"enemy.h"
+	"bullet.h"
+	"brick.h"
+	"eagle.h"
+	"bonus.h"
 	<vector>
-	"Wall.h"
-	"playertank.h"
-	"enemytank.h"
+	<string>
 
 1745229524 c:\sdl2\game\wall.h
 	<SDL.h>
 
-1745229524 source:c:\sdl2\game\game.cpp
+1745522472 source:c:\sdl2\game\game.cpp
 	"game.h"
+	"engine.h"
+	"appconfig.h"
+	"menu.h"
+	"scores.h"
+	<SDL.h>
+	<stdlib.h>
+	<ctime>
+	<fstream>
+	<algorithm>
+	<iostream>
+	<cmath>
 
 1745229524 source:c:\sdl2\game\wall.cpp
 	"Wall.h"
@@ -49,13 +64,12 @@
 	"Wall.h"
 	"bullet.h"
 
-1745229524 c:\sdl2\game\bullet.h
-	<SDL.h>
-	<vector>
+1745505284 c:\sdl2\game\bullet.h
+	"object.h"
 
-1745229524 source:c:\sdl2\game\bullet.cpp
+1745505389 source:c:\sdl2\game\bullet.cpp
 	"bullet.h"
-	"game.h"
+	"appconfig.h"
 
 1745229524 c:\sdl2\game\enemytank.h
 	<SDL.h>
@@ -76,11 +90,12 @@
 	<SDL_image.h>
 	<string>
 
-1745483411 c:\sdl2\game\app.h
+1745522944 c:\sdl2\game\app.h
 	"appstate.h"
 
-1745506744 c:\sdl2\game\appstate.h
-	"engine.h"
+1745523103 c:\sdl2\game\appstate.h
+	<SDL_events.h>
+	<string>
 
 1745506658 c:\sdl2\game\engine.h
 	"renderer.h"
@@ -89,5 +104,107 @@
 1745506946 c:\sdl2\game\renderer.h
 	<SDL.h>
 	<SDL_ttf.h>
+	<string>
+
+1745517588 c:\sdl2\game\spriteconfig.h
+	"type.h"
+	<map>
+	<SDL.h>
+
+1745517781 c:\sdl2\game\type.h
+
+1745505691 source:c:\sdl2\game\brick.cpp
+	"brick.h"
+	<iostream>
+
+1745505573 c:\sdl2\game\brick.h
+	"object.h"
+
+1745504646 c:\sdl2\game\object.h
+	"engine.h"
+
+1745505056 source:c:\sdl2\game\eagle.cpp
+	"eagle.h"
+
+1745505036 c:\sdl2\game\eagle.h
+	"object.h"
+
+1745506674 source:c:\sdl2\game\engine.cpp
+	"engine.h"
+
+1745522108 source:c:\sdl2\game\object.cpp
+	"object.h"
+	<SDL.h>
+	<iostream>
+	<algorithm>
+
+1745517621 source:c:\sdl2\game\spriteconfig.cpp
+	"spriteconfig.h"
+
+1745525605 c:\sdl2\game\appconfig.h
+	"player.h"
+	<iostream>
+	<SDL.h>
+	<vector>
+
+1745523350 c:\sdl2\game\player.h
+	"tank.h"
+
+1745522734 c:\sdl2\game\tank.h
+	"object.h"
+	"bullet.h"
+	"type.h"
+	<vector>
+
+1745505791 source:c:\sdl2\game\bonus.cpp
+	"bonus.h"
+	"appconfig.h"
+
+1745523901 c:\sdl2\game\bonus.h
+	"object.h"
+
+1745504932 source:c:\sdl2\game\enemy.cpp
+	"enemy.h"
+	"appconfig.h"
+	<stdlib.h>
+	<ctime>
+	<iostream>
+
+1745504837 c:\sdl2\game\enemy.h
+	"tank.h"
+
+1745522587 source:c:\sdl2\game\menu.cpp
+	"menu.h"
+	"engine.h"
+	"renderer.h"
+	"appconfig.h"
+	"type.h"
+	"game.h"
+	<iostream>
+
+1745522555 c:\sdl2\game\menu.h
+	"appstate.h"
+	"player.h"
+	<vector>
+	<string>
+
+1745522151 source:c:\sdl2\game\renderer.cpp
+	"renderer.h"
+	"appconfig.h"
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+
+1745522694 source:c:\sdl2\game\scores.cpp
+	"scores.h"
+	"engine.h"
+	"appconfig.h"
+	"game.h"
+	"menu.h"
+
+1745522672 c:\sdl2\game\scores.h
+	"appstate.h"
+	"player.h"
+	<vector>
 	<string>
 

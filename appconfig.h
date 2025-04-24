@@ -10,6 +10,7 @@ using namespace std;
 // Lớp tập hợp các tham số ứng dụng (thông số cửa sổ, cài đặt game, các tùy chọn chung của game)
 class AppConfig
 {
+public:
    static string texture_path; // đường dẫn texture đến các đối tượng
    static string levels_path; //đường đến thư mục chứa các màn chơi
    static string font_name; //đường dẫn đến font chữ
@@ -34,7 +35,7 @@ class AppConfig
    static unsigned protect_eagle_time; // thời gian lớp bảo vệ bằng đá quanh chim đại bàng
    static unsigned bonus_blink_time; // thời gian nhấp nháy của phần thưởng
    static unsigned player_reload_time; // thời gian tối thiểu 2 lần bắn đạng của người chơi
-   static int enmeny_max_count_on_map; // số lượng xe tăng tối da xuất hiện đồng thời trên bản đồ
+   static int enemy_max_count_on_map; // số lượng xe tăng tối da xuất hiện đồng thời trên bản đồ
    static double game_over_entry_speed; //tốc độ di chuyển dòng chữ game over
    static double tank_default_speed; // tốc độ mặc định của xe tăng
    static double bullet_delault_speed; // tốc độ mặc định của viên đạn

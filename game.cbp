@@ -36,15 +36,21 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="app.cpp" />
+		<Unit filename="app.h" />
+		<Unit filename="appconfig.cpp" />
+		<Unit filename="appconfig.h" />
 		<Unit filename="bullet.cpp" />
 		<Unit filename="bullet.h" />
 		<Unit filename="enemytank.cpp" />
 		<Unit filename="enemytank.h" />
-		<Unit filename="game.cpp" />
-		<Unit filename="game.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="playertank.cpp" />
-		<Unit filename="playertank.h" />
+		<Unit filename="player.cpp" />
+		<Unit filename="player.h" />
+		<Unit filename="tank.cpp" />
+		<Unit filename="tank.h" />
+		<Unit filename="texture.cpp" />
+		<Unit filename="texture.h" />
 		<Unit filename="wall.cpp" />
 		<Unit filename="wall.h" />
 		<Extensions>

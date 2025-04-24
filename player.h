@@ -6,7 +6,7 @@
 class Player : public Tank
 {
 public:
-    struct Playerkeys //Cấu trúc lưu trữ các phím điều khiển tương ứng để điều khiển xe tăng của người chơi.
+    struct PlayerKeys //Cấu trúc lưu trữ các phím điều khiển tương ứng để điều khiển xe tăng của người chơi.
     {
         PlayerKeys(): up(SDL_SCANCODE_UNKNOWN), down(SDL_SCANCODE_UNKNOWN), left(SDL_SCANCODE_UNKNOWN), right(SDL_SCANCODE_UNKNOWN), fire(SDL_SCANCODE_UNKNOWN){}
         PlayerKeys(SDL_Scancode u, SDL_Scancode d, SDL_Scancode l, SDL_Scancode r, SDL_Scancode f): up(u), down(d), left(l), right(r), fire(f) {}
@@ -20,11 +20,11 @@ public:
     Player();
     Player(double x , double y, SpriteType type);
     void update(Uint32 dt);
-    void respawn;
-    void destroy;
+    void respawn();
+    void destroy();
     Bullet* fire();
     void changeStarCountBy(int c);
-    Playerkeys player_keys;
+    PlayerKeys player_keys;
     unsigned score;
 private:
     int star_count;

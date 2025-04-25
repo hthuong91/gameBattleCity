@@ -36,14 +36,14 @@ void App::run()
         srand(time(NULL)); // Khởi tạo bộ sinh số ngẫu nhiên( Kẻ địch xuất hiện ở vị trí bất kì, Hướng di chuyển của xe tăng địch, Power-up rơi ra ngẫu nhiên)
 
         Engine& engine = Engine::getEngine();
-        engine.innitModules();
+        engine.initModules();
         engine.getRenderer()->loadTexture(m_window);
         engine.getRenderer()->loadFont();
 
         m_app_state = new Menu;
 
         double FPS;
-        Unit32 time1, time2, dt, fps_time =0, fps_count = 0, delay =15;
+        Uint32 time1, time2, dt, fps_time =0, fps_count = 0, delay =15;
         time1 = SDL_GetTicks();
         while(is_running)
         {
@@ -52,7 +52,7 @@ void App::run()
             time1 = time2;
             if (m_app_state->finished())
             {
-                Appstate* new_state = m_app_state->nextState();
+                AppState* new_state = m_app_state->nextState();
                 delete m_app_state;
                 m_app_state = new_state;
             }
@@ -87,7 +87,7 @@ void App::run()
     SDL_Quit();
 }
 
-void App:eventProces()
+void App::eventProces()
 {
     SDL_Event event;
     while(SDL_PollEvent(&event))
@@ -98,7 +98,7 @@ void App:eventProces()
         }
         else if(event.type == SDL_WINDOWEVENT)
         {
-            if(event.window.event ==SDL_WINDOWEVENT_RESZIEED ||
+            if(event.window.event ==SDL_WINDOWEVENT_RESIZED ||
                event.window.event == SDL_WINDOWEVENT_MAXIMIZED ||
                event.window.event == SDL_WINDOWEVENT_RESTORED ||
                event.window.event == SDL_WINDOWEVENT_SHOWN)

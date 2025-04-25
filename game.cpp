@@ -374,14 +374,8 @@ void Game::eventProcess(SDL_Event *ev)
     }
 }
 
-/*
-. = puste pole
-# = murek
-@ = kamień
-% = krzaki
-~ = woda
-- = lód
- */
+
+
 
 void Game::loadLevel(std::string path)
 {

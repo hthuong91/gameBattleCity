@@ -141,7 +141,7 @@
 1745517621 source:c:\sdl2\game\spriteconfig.cpp
 	"spriteconfig.h"
 
-1745525605 c:\sdl2\game\appconfig.h
+1745566880 c:\sdl2\game\appconfig.h
 	"player.h"
 	<iostream>
 	<SDL.h>
@@ -207,4 +207,36 @@
 	"player.h"
 	<vector>
 	<string>
+
+1745566927 source:c:\sdl2\game\appconfig.cpp
+	"appconfig.h"
+
+1745482032 source:c:\sdl2\game\player.cpp
+	"player.h"
+	"appconfig.h"
+	<SDL.h>
+	<iostream>
+
+1745566371 source:c:\sdl2\game\tank.cpp
+	"tank.h"
+	"appconfig.h"
+	<algorithm>
+
+1745567058 source:c:\sdl2\game\app.cpp
+	"app.h"
+	"appconfig.h"
+	"engine.h"
+	"game.h"
+	"menu.h"
+	<ctime>
+	<iostream>
+	<stdlib.h>
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
+
+1675678514 c:\sdl2\game\\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
 

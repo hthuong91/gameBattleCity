@@ -267,7 +267,7 @@ void Tank::setDirection(Direction d)
 
 void Tank::collide(SDL_Rect &intersect_rect)
 {
-    if(intersect_rect.w > intersect_rect.h) // Va chạm từ phía trên hoặc phía dưới
+    if(intersect_rect.w > intersect_rect.h) {// Va chạm từ phía trên hoặc phía dưới
         if((direction == D_UP && intersect_rect.y <= collision_rect.y) ||
                 (direction == D_DOWN && (intersect_rect.y + intersect_rect.h) >= (collision_rect.y + collision_rect.h)))
         {

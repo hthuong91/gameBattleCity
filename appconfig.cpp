@@ -8,6 +8,9 @@ SDL_Rect AppConfig::map_rect = {0, 0, 26*16, 26*16};
 SDL_Rect AppConfig::status_rect = {26*16, 0, 3*16, AppConfig::map_rect.h};
 SDL_Rect AppConfig::windows_rect = {0, 0, AppConfig::map_rect.w + AppConfig::status_rect.w, AppConfig::map_rect.h};
 SDL_Rect AppConfig::tile_rect = {0, 0, 16, 16};
+const SDL_Scancode AppConfig::P1_FIRE_KEY = SDL_SCANCODE_SPACE;
+const SDL_Scancode AppConfig::P2_FIRE_KEY = SDL_SCANCODE_RETURN;
+
 
 vector<SDL_Point> AppConfig::player_starting_point =
 []{
@@ -27,11 +30,11 @@ vector<SDL_Point> AppConfig::enemy_starting_point =
 vector<Player::PlayerKeys> AppConfig::player_keys =
 []{
     vector<Player::PlayerKeys> v;
-    v.push_back({SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, P1_FIRE_KEY});
-    v.push_back({SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, P2_FIRE_KEY});
+    v.push_back({SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, AppConfig::P1_FIRE_KEY});
+    v.push_back({SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, AppConfig::P2_FIRE_KEY});
+
     return v;
 }();
-
 unsigned AppConfig::level_start_time = 2000;
 unsigned AppConfig::slip_time = 380;
 unsigned AppConfig::enemy_start_count = 20;

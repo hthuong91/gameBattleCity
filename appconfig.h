@@ -38,8 +38,10 @@ public:
    static int enemy_max_count_on_map; // số lượng xe tăng tối da xuất hiện đồng thời trên bản đồ
    static double game_over_entry_speed; //tốc độ di chuyển dòng chữ game over
    static double tank_default_speed; // tốc độ mặc định của xe tăng
-   static double bullet_delault_speed; // tốc độ mặc định của viên đạn
+   static double bullet_default_speed; // tốc độ mặc định của viên đạn
    static bool show_enemy_target; // biến lưu thông tin liệu chức năng hiển thị mục tiêu của kẻ địch có được bật hay không
+   static const SDL_Scancode P1_FIRE_KEY;
+   static const SDL_Scancode P2_FIRE_KEY;
 };
 
 #endif // APPCONFIG_H

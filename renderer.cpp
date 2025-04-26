@@ -1,3 +1,4 @@
+
 #include "renderer.h"
 #include "appconfig.h"
 #include <SDL.h>

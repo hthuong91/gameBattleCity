@@ -102,17 +102,17 @@ void Game::draw()
             renderer->drawText(&pos, AppConfig::game_over_text, {255, 10, 10, 255});
         }
 
-        //===========Status gry===========
+        //trạng thái trò chơi
         SDL_Rect src = engine.getSpriteConfig()->getSpriteData(ST_LEFT_ENEMY)->rect;
         SDL_Rect dst;
         SDL_Point p_dst;
-        //wrogowie do zabicia
+        //kẻ thù cần bị tiêu diệt
         for(int i = 0; i < m_enemy_to_kill; i++)
         {
             dst = {AppConfig::status_rect.x + 8 + src.w * (i % 2), 5 + src.h * (i / 2), src.w, src.h};
             renderer->drawObject(&src, &dst);
         }
-        //życia graczy
+        //mạng sống của người chơi
         int i = 0;
         for(auto player : m_players)
         {
@@ -122,7 +122,7 @@ void Game::draw()
             renderer->drawObject(&player->src_rect, &dst);
             renderer->drawText(&p_dst, Engine::intToString(player->lives_count), {0, 0, 0, 255}, 3);
         }
-        //numer mapy
+        //số bản đồ
         src = engine.getSpriteConfig()->getSpriteData(ST_STAGE_STATUS)->rect;
         dst = {AppConfig::status_rect.x + 8, static_cast<int>(185 + (m_players.size() + m_killed_players.size()) * 18), src.w, src.h};
         p_dst = {dst.x + 10, dst.y + 26};
@@ -154,18 +154,18 @@ void Game::update(Uint32 dt)
         std::vector<Player*>::iterator pl1, pl2;
         std::vector<Enemy*>::iterator en1, en2;
 
-        //sprawdzenie kolizji czołgów graczy ze sobą
+        // kiểm tra va chạm giữa các xe tăng của người chơi với nhau
         for(pl1 = m_players.begin(); pl1 != m_players.end(); pl1++)
             for(pl2 = pl1 + 1; pl2 != m_players.end(); pl2++)
                 checkCollisionTwoTanks(*pl1, *pl2, dt);
 
 
-        //sprawdzenie kolizji czołgów przeciwników ze sobą
+        // Kiểm tra va chạm giữa các xe tăng đối thủ với nhau
         for(en1 = m_enemies.begin(); en1 != m_enemies.end(); en1++)
              for(en2 = en1 + 1; en2 != m_enemies.end(); en2++)
                 checkCollisionTwoTanks(*en1, *en2, dt);
 
-        //sprawdzenie kolizji kuli z lewelem
+        // Kiểm tra va chạm giữa viên đạn và bức tường.
         for(auto enemy : m_enemies)
             for(auto bullet : enemy->bullets)
                 checkCollisionBulletWithLevel(bullet);
@@ -180,32 +180,31 @@ void Game::update(Uint32 dt)
         for(auto player : m_players)
             for(auto enemy : m_enemies)
             {
-                //sprawdzenie kolizji czołgów przeciwników z graczami
+                // Kiểm tra va chạm giữa xe tăng đối thủ và người chơi.
                 checkCollisionTwoTanks(player, enemy, dt);
-                //sprawdzenie kolizji pocisków gracza z przeciwnikiem
+                // Kiểm tra va chạm giữa viên đạn của người chơi và đối thủ.
                 checkCollisionPlayerBulletsWithEnemy(player, enemy);
 
-                //sprawdzenie kolizji pocisku gracza z pociskiem przeciwnika
+                // Kiểm tra va chạm giữa viên đạn của người chơi và viên đạn của đối thủ.
                 for(auto bullet1 : player->bullets)
                      for(auto bullet2 : enemy->bullets)
                             checkCollisionTwoBullets(bullet1, bullet2);
             }
 
-        //sprawdzenie kolizji pocisku przeciknika z graczem
+        // Kiểm tra va chạm giữa viên đạn của đối thủ và người chơi.
         for(auto enemy : m_enemies)
             for(auto player : m_players)
                     checkCollisionEnemyBulletsWithPlayer(enemy, player);
 
-        //sprawdzanie kolizji gracza z bunusem
+        // Kiểm tra va chạm giữa người chơi và phần thưởng.
         for(auto player : m_players)
             for(auto bonus : m_bonuses)
                 checkCollisionPlayerWithBonus(player, bonus);
 
-        //Sprawdzenie kolizji czołgów z poziomem
+        // Kiểm tra va chạm giữa xe tăng và bức tường/bản đồ.
         for(auto enemy : m_enemies) checkCollisionTankWithLevel(enemy, dt);
         for(auto player : m_players) checkCollisionTankWithLevel(player, dt);
-
-        //nadanie celów przeciwników
+        // Gán mục tiêu cho các đối thủ.
         int min_metric; // 2 * 26 * 16
         int metric;
         SDL_Point target;
@@ -232,7 +231,7 @@ void Game::update(Uint32 dt)
             enemy->target_position = target;
         }
 
-        //Update wszystkich obiektów
+        // Cập nhật tất cả các đối tượng.
         for(auto enemy : m_enemies) enemy->update(dt);
         for(auto player : m_players) player->update(dt);
         for(auto bonus : m_bonuses) bonus->update(dt);
@@ -245,13 +244,13 @@ void Game::update(Uint32 dt)
 
         for(auto bush : m_bushes) bush->update(dt);
 
-        //usunięcie niepotrzebnych elementów
+        // Xóa các yếu tố không cần thiết.
         m_enemies.erase(std::remove_if(m_enemies.begin(), m_enemies.end(), [](Enemy*e){if(e->to_erase) {delete e; return true;} return false;}), m_enemies.end());
         m_players.erase(std::remove_if(m_players.begin(), m_players.end(), [this](Player*p){if(p->to_erase) {m_killed_players.push_back(p); return true;} return false;}), m_players.end());
         m_bonuses.erase(std::remove_if(m_bonuses.begin(), m_bonuses.end(), [](Bonus*b){if(b->to_erase) {delete b; return true;} return false;}), m_bonuses.end());
         m_bushes.erase(std::remove_if(m_bushes.begin(), m_bushes.end(), [](Object*b){if(b->to_erase) {delete b; return true;} return false;}), m_bushes.end());
 
-        //dodanie nowego przeciwnika
+        // Thêm đối thủ mới.
         m_enemy_redy_time += dt;
         if(m_enemies.size() < (AppConfig::enemy_max_count_on_map < m_enemy_to_kill ? AppConfig::enemy_max_count_on_map : m_enemy_to_kill) && m_enemy_redy_time > AppConfig::enemy_redy_time)
         {
@@ -413,10 +412,10 @@ void Game::loadLevel(std::string path)
         m_level_columns_count = m_level.at(0).size();
     else m_level_columns_count = 0;
 
-    //tworzymy orzełka
+    // Tạo hình ảnh con đại bàng.
     m_eagle = new Eagle(12 * AppConfig::tile_rect.w, (m_level_rows_count - 2) * AppConfig::tile_rect.h);
 
-    //wyczyszczenie miejsca orzełeka
+    // Xóa vị trí của con đại bàng.
     for(int i = 12; i < 14 && i < m_level_columns_count; i++)
     {
         for(int j = m_level_rows_count - 2; j < m_level_rows_count; j++)
@@ -482,7 +481,7 @@ void Game::checkCollisionTankWithLevel(Tank* tank, Uint32 dt)
     SDL_Rect pr, *lr;
     Object* o;
 
-    //========================kolizja z elementami mapy========================
+    //Kiểm tra va chạm với các yếu tố trên bản đồ
     switch(tank->direction)
     {
     case D_UP:
@@ -544,9 +543,9 @@ void Game::checkCollisionTankWithLevel(Tank* tank, Uint32 dt)
             }
         }
 
-    //========================kolizja z granicami mapy========================
+    //Kiểm tra va chạm với biên giới bản đồ
     SDL_Rect outside_map_rect;
-    //prostokąt po lewej stronie mapy
+    //Hình chữ nhật ở phía bên trái của bản đồ.
     outside_map_rect.x = -AppConfig::tile_rect.w;
     outside_map_rect.y = -AppConfig::tile_rect.h;
     outside_map_rect.w = AppConfig::tile_rect.w;
@@ -555,7 +554,7 @@ void Game::checkCollisionTankWithLevel(Tank* tank, Uint32 dt)
     if(intersect_rect.w > 0 && intersect_rect.h > 0)
         tank->collide(intersect_rect);
 
-    //prostokąt po prawej stronie mapy
+    //Hình chữ nhật ở phía bên phải của bản đồ.
     outside_map_rect.x = AppConfig::map_rect.w;
     outside_map_rect.y = -AppConfig::tile_rect.h;
     outside_map_rect.w = AppConfig::tile_rect.w;
@@ -564,7 +563,7 @@ void Game::checkCollisionTankWithLevel(Tank* tank, Uint32 dt)
     if(intersect_rect.w > 0 && intersect_rect.h > 0)
         tank->collide(intersect_rect);
 
-    //prostokąt po górnej stronie mapy
+    //Hình chữ nhật ở phía trên cùng của bản đồ.
     outside_map_rect.x = 0;
     outside_map_rect.y = -AppConfig::tile_rect.h;
     outside_map_rect.w = AppConfig::map_rect.w;
@@ -573,7 +572,7 @@ void Game::checkCollisionTankWithLevel(Tank* tank, Uint32 dt)
     if(intersect_rect.w > 0 && intersect_rect.h > 0)
         tank->collide(intersect_rect);
 
-    //prostokąt po dolnej stronie mapy
+    //Hình chữ nhật ở phía dưới cùng của bản đồ.
     outside_map_rect.x = 0;
     outside_map_rect.y = AppConfig::map_rect.h;
     outside_map_rect.w = AppConfig::map_rect.w;
@@ -583,7 +582,7 @@ void Game::checkCollisionTankWithLevel(Tank* tank, Uint32 dt)
         tank->collide(intersect_rect);
 
 
-   //========================kolizja z orzełkiem========================
+   //Kiểm tra va chạm với con đại bàng
     intersect_rect = intersectRect(&m_eagle->collision_rect, &pr);
     if(intersect_rect.w > 0 && intersect_rect.h > 0)
         tank->collide(intersect_rect);
@@ -614,7 +613,7 @@ void Game::checkCollisionBulletWithLevel(Bullet* bullet)
     SDL_Rect intersect_rect;
     Object* o;
 
-    //========================kolizja z elementami mapy========================
+    //Kiểm tra va chạm với các yếu tố trên bản đồ
     switch(bullet->direction)
     {
     case D_UP:
@@ -676,12 +675,12 @@ void Game::checkCollisionBulletWithLevel(Bullet* bullet)
             }
         }
 
-    //========================kolizja z granicami mapy========================
+    //Kiểm tra va chạm với biên giới bản đồ
     if(br->x < 0 || br->y < 0 || br->x + br->w > AppConfig::map_rect.w || br->y + br->h > AppConfig::map_rect.h)
     {
         bullet->destroy();
     }
-    //========================kolizja z orzełkiem========================
+    //Kiểm tra va chạm với con đại bàng
     if(m_eagle->type == ST_EAGLE && !m_game_over)
     {
         intersect_rect = intersectRect(&m_eagle->collision_rect, br);

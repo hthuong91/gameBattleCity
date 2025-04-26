@@ -2,15 +2,16 @@
 #include "appconfig.h"
 #include <algorithm>
 
-Tank::Tank()
+Tank::Tank() //khởi tạo xe tăng ở vị trí và loại mặc định
     : Object(AppConfig::enemy_starting_point.at(0).x, AppConfig::enemy_starting_point.at(0).y, ST_TANK_A)
 {
+    // khởi tạo giá trị mặc định
     direction = D_UP;
     m_slip_time = 0;
     default_speed = AppConfig::tank_default_speed;
     speed = 0.0;
-    m_shield = nullptr;
-    m_boat = nullptr;
+    m_shield = nullptr; //khiên bảo vệ
+    m_boat = nullptr; // thuyền
     m_shield_time = 0;
     m_frozen_time = 0;
 }
@@ -57,13 +58,14 @@ void Tank::draw()
         if(bullet != nullptr) bullet->draw();
 }
 
-void Tank::update(Uint32 dt)
+void Tank::update(Uint32 dt) //cập nhật vị trí, trạng thái xử lí va chạm quản lí thời gian các hiệu ứng, xóa đạn đã bị hủy
 {
     if(to_erase) return;
     if(testFlag(TSF_LIFE))
     {
         if(!stop && !testFlag(TSF_FROZEN))
         {
+            // di chuyển xe tăng nếu không bị dừng hoặc bị đóng băng
             switch (direction)
             {
             case D_UP:
@@ -85,13 +87,13 @@ void Tank::update(Uint32 dt)
         dest_rect.y = pos_y;
         dest_rect.h = m_sprite->rect.h;
         dest_rect.w = m_sprite->rect.w;
-
+        //cập nhật hình chữ nhật va chạm
         collision_rect.x = dest_rect.x + 2;
         collision_rect.y = dest_rect.y + 2;
         collision_rect.h = dest_rect.h - 4;
         collision_rect.w = dest_rect.w - 4;
     }
-
+    // xử lí trạng thái trượt trên băng
     if(testFlag(TSF_ON_ICE) && m_slip_time > 0)
     {
         m_slip_time -= dt;
@@ -102,7 +104,7 @@ void Tank::update(Uint32 dt)
             direction = new_direction;
         }
     }
-
+    //cập nhật khiên bảo vệ
     if(testFlag(TSF_SHIELD) && m_shield != nullptr)
     {
         m_shield_time += dt;
@@ -156,7 +158,7 @@ void Tank::update(Uint32 dt)
     bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](Bullet*b){if(b->to_erase) {delete b; return true;} return false;}), bullets.end());
 }
 
-Bullet* Tank::fire()
+Bullet* Tank::fire() //tạo đạn thêm và danh sách bullets, đặt tốc độ đạn
 {
     if(!testFlag(TSF_LIFE)) return nullptr;
     if(bullets.size() < m_bullet_max_size)
@@ -230,7 +232,7 @@ SDL_Rect Tank::nextCollisionRect(Uint32 dt)
     return r;
 }
 
-void Tank::setDirection(Direction d)
+void Tank::setDirection(Direction d) //xử lí hướng thay đổi (cả th trượt trên băng)
 {
     if(!(testFlag(TSF_LIFE) || testFlag(TSF_CREATE))) return;
     if(testFlag(TSF_ON_ICE))
@@ -265,7 +267,7 @@ void Tank::setDirection(Direction d)
     }
 }
 
-void Tank::collide(SDL_Rect &intersect_rect)
+void Tank::collide(SDL_Rect &intersect_rect) // dừng xe khi va chạm với vật cản
 {
     if(intersect_rect.w > intersect_rect.h) {// Va chạm từ phía trên hoặc phía dưới
         if((direction == D_UP && intersect_rect.y <= collision_rect.y) ||
@@ -286,12 +288,12 @@ void Tank::collide(SDL_Rect &intersect_rect)
     }
 }
 
-void Tank::destroy()
+void Tank::destroy() // kích hoạt hiệu ứng nổ và xử lí hồi sinh hoặc xóa xe tăng
 {
     if(!testFlag(TSF_LIFE)) return;
 
     stop = true;
-    m_flags = TSF_DESTROYED;
+    m_flags = TSF_DESTROYED; // đánh dấu xe tăng bị hủy
 
     m_frame_display_time = 0;
     m_current_frame = 0;
@@ -299,7 +301,7 @@ void Tank::destroy()
     speed = 0;
     m_slip_time = 0;
     m_sprite = Engine::getEngine().getSpriteConfig()->getSpriteData(ST_DESTROY_TANK);
-
+    //hiệu ứng nổ
     collision_rect.x = 0;
     collision_rect.y = 0;
     collision_rect.h = 0;
@@ -357,7 +359,7 @@ bool Tank::testFlag(TankStateFlag flag)
     return (m_flags & flag) == flag;
 }
 
-void Tank::respawn()
+void Tank::respawn() //hiệu ứng hồi sinh đặt lại trạng thái
 {
     m_sprite = Engine::getEngine().getSpriteConfig()->getSpriteData(ST_CREATE);
     speed = 0.0;

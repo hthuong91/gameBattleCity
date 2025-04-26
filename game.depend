@@ -64,7 +64,8 @@
 	"Wall.h"
 	"bullet.h"
 
-1745505284 c:\sdl2\game\bullet.h
+1745699361 c:\sdl2\game\bullet.h
+	<SDL.h>
 	"object.h"
 
 1745505389 source:c:\sdl2\game\bullet.cpp
@@ -101,7 +102,7 @@
 	"renderer.h"
 	"spriteconfig.h"
 
-1745506946 c:\sdl2\game\renderer.h
+1745699247 c:\sdl2\game\renderer.h
 	<SDL.h>
 	<SDL_ttf.h>
 	<string>
@@ -141,13 +142,13 @@
 1745517621 source:c:\sdl2\game\spriteconfig.cpp
 	"spriteconfig.h"
 
-1745566880 c:\sdl2\game\appconfig.h
+1745699133 c:\sdl2\game\appconfig.h
 	"player.h"
 	<iostream>
 	<SDL.h>
 	<vector>
 
-1745523350 c:\sdl2\game\player.h
+1745699032 c:\sdl2\game\player.h
 	"tank.h"
 
 1745686556 c:\sdl2\game\tank.h
@@ -188,7 +189,7 @@
 	<vector>
 	<string>
 
-1745522151 source:c:\sdl2\game\renderer.cpp
+1745699263 source:c:\sdl2\game\renderer.cpp
 	"renderer.h"
 	"appconfig.h"
 	<SDL.h>
@@ -208,7 +209,7 @@
 	<vector>
 	<string>
 
-1745677742 source:c:\sdl2\game\appconfig.cpp
+1745699160 source:c:\sdl2\game\appconfig.cpp
 	"appconfig.h"
 
 1745482032 source:c:\sdl2\game\player.cpp

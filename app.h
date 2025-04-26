@@ -5,14 +5,14 @@
 class App
 {
     public:
-        App();
-        ~App();
-        void run();
-        void eventProces();
+        App(); // constructor, tạo đối tượng
+        ~App(); // destrctor, hủy đối tượng
+        void run(); // hàm chạy app
+        void eventProces(); // hàm xử lí sự kiện
     private:
-        bool is_running;
-        AppState* m_app_state;
-        SDL_Window* m_window;
+        bool is_running; // biến kiểm tra ứng dụng có đang chạy hay không
+        AppState* m_app_state; // trạng thái hiện tại của ứng dụng (vd menu, game,...)
+        SDL_Window* m_window; // cửa sổ SDL
 };
 
 #endif  //APP_H

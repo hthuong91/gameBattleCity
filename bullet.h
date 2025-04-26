@@ -1,8 +1,7 @@
 #ifndef BULLET_H
 #define BULLET_H
-
-#include "object.h"
-
+#include<SDL.h>
+#include"object.h"
 class Bullet : public Object
 {
 public:

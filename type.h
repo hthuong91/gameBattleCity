@@ -1,8 +1,9 @@
 #ifndef TYPE_H
 #define TYPE_H
 
-enum SpriteType
+enum SpriteType // kiểu dữ liệu đặc biệt định nghĩa các giá trị hằng số có tên được đánh số thứ tự tăng dần trong 1 enum nếu không định nghĩa sẽ đầu từ 0
 {
+    // định nghĩa các đối tượng trong game
     ST_TANK_A,
     ST_TANK_B,
     ST_TANK_C,
@@ -49,19 +50,21 @@ enum SpriteType
 
 enum TankStateFlag
 {
-    TSF_SHIELD = 1 << 1, //po wzięciu hełmu
-    TSF_FROZEN = 1 << 2, //po wzięciu zegara przez przeciwnika
-    TSF_DESTROYED = 1 << 3, //po wzięciu bomby prez przeciwnika lub trafieniu kulą
-    TSF_BOAT = 1 << 4, //po wzięciu łódki, pozwala przechodzić przez wodę
-    TSF_BONUS = 1 << 5, //po trafieniu tego czołgu na mapie pojawi się bonus
-    TSF_ON_ICE = 1 << 6,  //jeżeli czołg jest na lodzie to się ślizga
-    TSF_CREATE = 1 << 7, //tworzenie czołgu
-    TSF_LIFE = 1 << 8,
-    TSF_MENU = 1 << 9 //dwukrotne przyspieszenie animacji
+    // định nghĩa các trạng thái của xe tăng
+    TSF_SHIELD = 1 << 1,     // Khi nhận được mũ bảo hiểm (trạng thái bảo vệ)
+    TSF_FROZEN = 1 << 2,      // Khi đối phương nhận được đồng hồ (bị đóng băng)
+    TSF_DESTROYED = 1 << 3,   // Khi bị trúng bom từ đối phương hoặc bị bắn trúng
+    TSF_BOAT = 1 << 4,        // Khi nhận được thuyền, cho phép đi qua nước
+    TSF_BONUS = 1 << 5,       // Khi tiêu diệt xe tăng này, phần thưởng sẽ xuất hiện trên bản đồ
+    TSF_ON_ICE = 1 << 6,      // Nếu xe tăng đang ở trên băng, nó sẽ trượt
+    TSF_CREATE = 1 << 7,      // Trạng thái đang tạo xe tăng (hiệu ứng spawn)
+    TSF_LIFE = 1 << 8,        // Trạng thái mạng sống (có thể dùng cho player)
+    TSF_MENU = 1 << 9         // Tăng tốc độ animation gấp đôi (dùng trong menu)
 };
 
 enum Direction
 {
+    // định nghĩa 4 hướng di chuyển/ đạn bắn trong game
     D_UP = 0,
     D_RIGHT = 1,
     D_DOWN = 2,

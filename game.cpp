@@ -364,7 +364,7 @@ void Game::eventProcess(SDL_Event *ev)
         }
     }
 }
-void Game::loadLevel(std::string path)
+void Game::loadLevel(const std::string& path)
 {
     std::fstream level(path, std::ios::in);
     std::string line;
@@ -394,7 +394,10 @@ void Game::loadLevel(std::string path)
             m_level.push_back(row);
         }
     }
-
+    else
+    {
+        std::cerr << "Error: Could not open level file: " << path << std::endl;
+    }
     m_level_rows_count = m_level.size();
     if(m_level_rows_count)
         m_level_columns_count = m_level.at(0).size();
@@ -773,7 +776,7 @@ void Game::nextLevel()
     m_finished = false;
     m_enemy_to_kill = AppConfig::enemy_start_count;
 
-    std::string level_path = AppConfig::levels_path + Engine::intToString(m_current_level);
+    std::string level_path = AppConfig::levels_path + Engine::intToString(m_current_level) + ".txt";
     loadLevel(level_path);
 
     if(m_players.empty())

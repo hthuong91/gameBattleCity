@@ -91,7 +91,6 @@ void Game::draw()
         for(auto player : m_players) player->draw();
         for(auto enemy : m_enemies) enemy->draw();
         for(auto bush : m_bushes) bush->draw();
-        for(auto bonus : m_bonuses) bonus->draw();
         m_eagle->draw();
 
         if(m_game_over)
@@ -196,11 +195,6 @@ void Game::update(Uint32 dt)
             for(auto player : m_players)
                     checkCollisionEnemyBulletsWithPlayer(enemy, player);
 
-        // Kiểm tra va chạm giữa người chơi và phần thưởng.
-        for(auto player : m_players)
-            for(auto bonus : m_bonuses)
-                checkCollisionPlayerWithBonus(player, bonus);
-
         // Kiểm tra va chạm giữa xe tăng và bức tường/bản đồ.
         for(auto enemy : m_enemies) checkCollisionTankWithLevel(enemy, dt);
         for(auto player : m_players) checkCollisionTankWithLevel(player, dt);
@@ -234,7 +228,6 @@ void Game::update(Uint32 dt)
         // Cập nhật tất cả các đối tượng.
         for(auto enemy : m_enemies) enemy->update(dt);
         for(auto player : m_players) player->update(dt);
-        for(auto bonus : m_bonuses) bonus->update(dt);
         m_eagle->update(dt);
 
         for(auto row : m_level)
@@ -247,7 +240,6 @@ void Game::update(Uint32 dt)
         // Xóa các yếu tố không cần thiết.
         m_enemies.erase(std::remove_if(m_enemies.begin(), m_enemies.end(), [](Enemy*e){if(e->to_erase) {delete e; return true;} return false;}), m_enemies.end());
         m_players.erase(std::remove_if(m_players.begin(), m_players.end(), [this](Player*p){if(p->to_erase) {m_killed_players.push_back(p); return true;} return false;}), m_players.end());
-        m_bonuses.erase(std::remove_if(m_bonuses.begin(), m_bonuses.end(), [](Bonus*b){if(b->to_erase) {delete b; return true;} return false;}), m_bonuses.end());
         m_bushes.erase(std::remove_if(m_bushes.begin(), m_bushes.end(), [](Object*b){if(b->to_erase) {delete b; return true;} return false;}), m_bushes.end());
 
         // Thêm đối thủ mới.
@@ -453,9 +445,6 @@ void Game::clearLevel()
 
     for(auto player : m_players) delete player;
     m_players.clear();
-
-    for(auto bonus : m_bonuses) delete bonus;
-    m_bonuses.clear();
 
     for(auto row : m_level)
     {
@@ -731,7 +720,6 @@ void Game::checkCollisionPlayerBulletsWithEnemy(Player *player, Enemy *enemy)
             intersect_rect = intersectRect(&bullet->collision_rect, &enemy->collision_rect);
             if(intersect_rect.w > 0 && intersect_rect.h > 0)
             {
-                if(enemy->testFlag(TSF_BONUS)) generateBonus();
 
                 bullet->destroy();
                 enemy->destroy();
@@ -773,76 +761,6 @@ void Game::checkCollisionTwoBullets(Bullet *bullet1, Bullet *bullet2)
     {
         bullet1->destroy();
         bullet2->destroy();
-    }
-}
-
-void Game::checkCollisionPlayerWithBonus(Player *player, Bonus *bonus)
-{
-    if(player->to_erase || bonus->to_erase) return;
-
-    SDL_Rect intersect_rect = intersectRect(&player->collision_rect, &bonus->collision_rect);
-    if(intersect_rect.w > 0 && intersect_rect.h > 0)
-    {
-        player->score += 300;
-
-        if(bonus->type == ST_BONUS_GRENADE)
-        {
-            for(auto enemy : m_enemies)
-            {
-                if(!enemy->to_erase)
-                {
-                    player->score += 200;
-                    while(enemy->lives_count > 0) enemy->destroy();
-                    m_enemy_to_kill--;
-                }
-            }
-        }
-        else if(bonus->type == ST_BONUS_HELMET)
-        {
-            player->setFlag(TSF_SHIELD);
-        }
-        else if(bonus->type == ST_BONUS_CLOCK)
-        {
-            for(auto enemy : m_enemies) if(!enemy->to_erase) enemy->setFlag(TSF_FROZEN);
-        }
-        else if(bonus->type == ST_BONUS_SHOVEL)
-        {
-            m_protect_eagle = true;
-            m_protect_eagle_time = 0;
-            for(int i = 0; i < 3; i++)
-            {
-                if(m_level.at(m_level_rows_count - i - 1).at(11) != nullptr)
-                    delete m_level.at(m_level_rows_count - i - 1).at(11);
-                m_level.at(m_level_rows_count - i - 1).at(11) = new Object(11 * AppConfig::tile_rect.w, (m_level_rows_count - i - 1) * AppConfig::tile_rect.h, ST_STONE_WALL);
-
-                if(m_level.at(m_level_rows_count - i - 1).at(14) != nullptr)
-                    delete m_level.at(m_level_rows_count - i - 1).at(14);
-                m_level.at(m_level_rows_count - i - 1).at(14) = new Object(14 * AppConfig::tile_rect.w, (m_level_rows_count - i - 1)  * AppConfig::tile_rect.h, ST_STONE_WALL);
-            }
-            for(int i = 12; i < 14; i++)
-            {
-                if(m_level.at(m_level_rows_count - 3).at(i) != nullptr)
-                    delete m_level.at(m_level_rows_count - 3).at(i);
-                m_level.at(m_level_rows_count - 3).at(i) = new Object(i * AppConfig::tile_rect.w, (m_level_rows_count - 3) * AppConfig::tile_rect.h, ST_STONE_WALL);
-            }
-        }
-        else if(bonus->type == ST_BONUS_TANK)
-        {
-            player->lives_count++;
-        }
-        else if(bonus->type == ST_BONUS_STAR)
-        {
-            player->changeStarCountBy(1);
-        }
-        else if(bonus->type == ST_BONUS_GUN)
-        {
-            player->changeStarCountBy(3);
-        }
-        else if(bonus->type == ST_BONUS_BOAT)
-        {
-            player->setFlag(TSF_BOAT);
-        }
-        bonus->to_erase = true;
     }
 }
 
@@ -916,17 +834,3 @@ void Game::generateEnemy()
     m_enemies.push_back(e);
 }
 
-void Game::generateBonus()
-{
-    Bonus* b = new Bonus(0, 0, static_cast<SpriteType>(rand() % (ST_BONUS_BOAT - ST_BONUS_GRENADE + 1) + ST_BONUS_GRENADE));
-    SDL_Rect intersect_rect;
-    do
-    {
-        b->pos_x = rand() % (AppConfig::map_rect.x + AppConfig::map_rect.w - 1 *  AppConfig::tile_rect.w);
-        b->pos_y = rand() % (AppConfig::map_rect.y + AppConfig::map_rect.h - 1 * AppConfig::tile_rect.h);
-        b->update(0);
-        intersect_rect = intersectRect(&b->collision_rect, &m_eagle->collision_rect);
-    }while(intersect_rect.w > 0 && intersect_rect.h > 0);
-
-    m_bonuses.push_back(b);
-}

@@ -4,7 +4,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
-
+#include "map.h"
 class Renderer
 {
 public:
@@ -26,6 +26,7 @@ public:
     void drawText(const SDL_Point* start, std::string text, SDL_Color text_color, int font_size = 1);
 
     void drawRect(const SDL_Rect* rect, SDL_Color rect_color, bool fill = false);
+
 
 private:
 

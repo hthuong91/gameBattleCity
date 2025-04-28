@@ -85,19 +85,19 @@ void Enemy::update(Uint32 dt)
 
     if(testFlag(TSF_LIFE))
     {
-        if(testFlag(TSF_BONUS))
-            src_rect = moveRect(m_sprite->rect, (testFlag(TSF_ON_ICE) ? new_direction : direction) - 4, m_current_frame);
-        else
-            src_rect = moveRect(m_sprite->rect, (testFlag(TSF_ON_ICE) ? new_direction : direction) + (lives_count -1) * 4, m_current_frame);
+        src_rect = moveRect(m_sprite->rect, (testFlag(TSF_ON_ICE) ? new_direction : direction) + (lives_count - 1) * 4, m_current_frame);
     }
     else
+    {
         src_rect = moveRect(m_sprite->rect, 0, m_current_frame);
+    }
 
     if(testFlag(TSF_FROZEN)) return;
 
     m_direction_time += dt;
     m_speed_time += dt;
     m_fire_time += dt;
+
     if(m_direction_time > m_keep_direction_time)
     {
         m_direction_time = 0;
@@ -105,7 +105,7 @@ void Enemy::update(Uint32 dt)
 
         float p = static_cast<float>(rand()) / RAND_MAX;
 
-        if(p < (type == ST_TANK_A ? 0.8 : 0.5) && target_position.x > 0 && target_position.y > 0)
+        if(p < (type == ST_TANK_A ? 0.8f : 0.5f) && target_position.x > 0 && target_position.y > 0)
         {
             int dx = target_position.x - (dest_rect.x + dest_rect.w / 2);
             int dy = target_position.y - (dest_rect.y + dest_rect.h / 2);
@@ -113,22 +113,27 @@ void Enemy::update(Uint32 dt)
             p = static_cast<float>(rand()) / RAND_MAX;
 
             if(abs(dx) > abs(dy))
-                setDirection(p < 0.7 ? (dx < 0 ? D_LEFT : D_RIGHT) : (dy < 0 ? D_UP : D_DOWN));
+                setDirection(p < 0.7f ? (dx < 0 ? D_LEFT : D_RIGHT) : (dy < 0 ? D_UP : D_DOWN));
             else
-                setDirection(p < 0.7 ? (dy < 0 ? D_UP : D_DOWN) : (dx < 0 ? D_LEFT : D_RIGHT));
+                setDirection(p < 0.7f ? (dy < 0 ? D_UP : D_DOWN) : (dx < 0 ? D_LEFT : D_RIGHT));
         }
         else
+        {
             setDirection(static_cast<Direction>(rand() % 4));
+        }
     }
+
     if(m_speed_time > m_try_to_go_time)
     {
         m_speed_time = 0;
         m_try_to_go_time = rand() % 300;
         speed = default_speed;
     }
+
     if(m_fire_time > m_reload_time)
     {
         m_fire_time = 0;
+
         if(type == ST_TANK_D)
         {
             m_reload_time = rand() % 400;
@@ -137,6 +142,7 @@ void Enemy::update(Uint32 dt)
 
             if(stop) fire();
             else
+            {
                 switch (direction)
                 {
                 case D_UP:
@@ -152,15 +158,11 @@ void Enemy::update(Uint32 dt)
                     if(dx < 0 && abs(dy) < dest_rect.h) fire();
                     break;
                 }
-        }
-        else if(type == ST_TANK_C)
-        {
-            m_reload_time = rand() % 800;
-            fire();
+            }
         }
         else
         {
-            m_reload_time = rand() % 1000;
+            m_reload_time = (type == ST_TANK_C) ? rand() % 800 : rand() % 1000;
             fire();
         }
     }
@@ -168,10 +170,10 @@ void Enemy::update(Uint32 dt)
     stop = false;
 }
 
+
 void Enemy::destroy()
 {
     lives_count--;
-//    clearFlag(TSF_BONUS); // cho phép bonus chỉ rơi ra một lần
 
     if(lives_count <= 0)
     {

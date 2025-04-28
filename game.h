@@ -7,7 +7,6 @@
 #include "bullet.h"
 #include "brick.h"
 #include "eagle.h"
-#include "bonus.h"
 #include <vector>
 #include <string>
 
@@ -57,8 +56,6 @@ public:
 
     void checkCollisionTwoBullets(Bullet* bullet1, Bullet* bullet2);
 
-    void checkCollisionPlayerWithBonus(Player* player, Bonus* bonus);
-
     int m_level_columns_count;
 
     int m_level_rows_count;
@@ -72,8 +69,6 @@ public:
     std::vector<Player*> m_players;
 
     std::vector<Player*> m_killed_players;
-
-    std::vector<Bonus*> m_bonuses;
 
     Eagle* m_eagle;
 

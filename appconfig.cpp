@@ -7,7 +7,7 @@ string AppConfig::game_over_text = "GAME OVER";
 SDL_Rect AppConfig::map_rect = {0, 0, 26*16, 26*16};
 SDL_Rect AppConfig::status_rect = {26*16, 0, 3*16, AppConfig::map_rect.h};
 SDL_Rect AppConfig::windows_rect = {0, 0, AppConfig::map_rect.w + AppConfig::status_rect.w, AppConfig::map_rect.h};
-SDL_Rect AppConfig::tile_rect = {0, 0, 16, 16};
+SDL_Rect AppConfig::tile_rect = {0, 0, 16, 16 };
 const SDL_Scancode AppConfig::P1_FIRE_KEY = SDL_SCANCODE_SPACE;
 const SDL_Scancode AppConfig::P2_FIRE_KEY = SDL_SCANCODE_RETURN;
 

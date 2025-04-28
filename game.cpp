@@ -295,7 +295,7 @@ void Game::update(Uint32 dt)
                 }
             }
 
-            if(m_protect_eagle && m_protect_eagle_time > AppConfig::protect_eagle_time / 4 * 3 && m_protect_eagle_time / AppConfig::bonus_blink_time % 2)
+            if(m_protect_eagle && m_protect_eagle_time > AppConfig::protect_eagle_time / 4 * 3 && m_protect_eagle_time )
             {
                 for(int i = 0; i < 3; i++)
                 {
@@ -364,10 +364,6 @@ void Game::eventProcess(SDL_Event *ev)
         }
     }
 }
-
-
-
-
 void Game::loadLevel(std::string path)
 {
     std::fstream level(path, std::ios::in);
@@ -437,6 +433,7 @@ AppState* Game::nextState()
     Menu* m = new Menu;
     return m;
 }
+
 
 void Game::clearLevel()
 {
@@ -829,8 +826,6 @@ void Game::generateEnemy()
     else e->lives_count = 4;
 
     p = static_cast<float>(rand()) / RAND_MAX;
-    if(p < 0.12) e->setFlag(TSF_BONUS);
 
     m_enemies.push_back(e);
 }
-

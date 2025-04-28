@@ -19,7 +19,7 @@
 1744818245 c:\sdl2\game\include\wall.h
 	<SDL.h>
 
-1745523971 c:\sdl2\game\game.h
+1745835188 c:\sdl2\game\game.h
 	"appstate.h"
 	"object.h"
 	"player.h"
@@ -27,14 +27,13 @@
 	"bullet.h"
 	"brick.h"
 	"eagle.h"
-	"bonus.h"
 	<vector>
 	<string>
 
 1745229524 c:\sdl2\game\wall.h
 	<SDL.h>
 
-1745691082 source:c:\sdl2\game\game.cpp
+1745835357 source:c:\sdl2\game\game.cpp
 	"game.h"
 	"engine.h"
 	"appconfig.h"
@@ -102,10 +101,11 @@
 	"renderer.h"
 	"spriteconfig.h"
 
-1745699247 c:\sdl2\game\renderer.h
+1745703813 c:\sdl2\game\renderer.h
 	<SDL.h>
 	<SDL_ttf.h>
 	<string>
+	"map.h"
 
 1745517588 c:\sdl2\game\spriteconfig.h
 	"type.h"
@@ -133,16 +133,16 @@
 1745679928 source:c:\sdl2\game\engine.cpp
 	"engine.h"
 
-1745522108 source:c:\sdl2\game\object.cpp
+1745781278 source:c:\sdl2\game\object.cpp
 	"object.h"
 	<SDL.h>
 	<iostream>
 	<algorithm>
 
-1745517621 source:c:\sdl2\game\spriteconfig.cpp
+1745783344 source:c:\sdl2\game\spriteconfig.cpp
 	"spriteconfig.h"
 
-1745699133 c:\sdl2\game\appconfig.h
+1745835105 c:\sdl2\game\appconfig.h
 	"player.h"
 	<iostream>
 	<SDL.h>
@@ -189,7 +189,7 @@
 	<vector>
 	<string>
 
-1745699263 source:c:\sdl2\game\renderer.cpp
+1745703813 source:c:\sdl2\game\renderer.cpp
 	"renderer.h"
 	"appconfig.h"
 	<SDL.h>
@@ -209,7 +209,7 @@
 	<vector>
 	<string>
 
-1745699160 source:c:\sdl2\game\appconfig.cpp
+1745835129 source:c:\sdl2\game\appconfig.cpp
 	"appconfig.h"
 
 1745482032 source:c:\sdl2\game\player.cpp
@@ -223,7 +223,7 @@
 	"appconfig.h"
 	<algorithm>
 
-1745693748 source:c:\sdl2\game\app.cpp
+1745702704 source:c:\sdl2\game\app.cpp
 	"app.h"
 	"appconfig.h"
 	"engine.h"
@@ -240,4 +240,6 @@
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
+
+1745703653 c:\sdl2\game\map.h
 

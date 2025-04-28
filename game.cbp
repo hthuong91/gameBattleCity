@@ -41,8 +41,6 @@
 		<Unit filename="appconfig.cpp" />
 		<Unit filename="appconfig.h" />
 		<Unit filename="appstate.h" />
-		<Unit filename="bonus.cpp" />
-		<Unit filename="bonus.h" />
 		<Unit filename="brick.cpp" />
 		<Unit filename="brick.h" />
 		<Unit filename="bullet.cpp" />

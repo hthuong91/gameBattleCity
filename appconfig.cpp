@@ -37,7 +37,7 @@ vector<Player::PlayerKeys> AppConfig::player_keys =
 }();
 unsigned AppConfig::level_start_time = 2000;
 unsigned AppConfig::slip_time = 380;
-unsigned AppConfig::enemy_start_count = 20;
+unsigned AppConfig::enemy_start_count = 5;
 unsigned AppConfig::enemy_redy_time = 500;
 unsigned AppConfig::player_bullet_max_size = 2;
 unsigned AppConfig::score_show_time = 3000;

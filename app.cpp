@@ -85,7 +85,6 @@ void App::run()
             frameCount++;
             if(SDL_GetTicks() - lastFPSCheck >= 1000) {
                 fps = frameCount / ((SDL_GetTicks() - lastFPSCheck) / 1000.0f);
-                std::cout << "FPS: " << fps << std::endl;
                 frameCount = 0;
                 lastFPSCheck = SDL_GetTicks();
             }

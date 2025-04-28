@@ -30,9 +30,9 @@ public:
 
     void eventProcess(SDL_Event* ev);
 
-    AppState* nextState();
-
     void loadLevel(std::string path);
+
+    AppState* nextState();
 
     void clearLevel();
 

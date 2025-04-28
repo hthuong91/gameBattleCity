@@ -4,7 +4,6 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
-#include "map.h"
 class Renderer
 {
 public:

@@ -1,5 +1,5 @@
 #include "appconfig.h"
-
+#include<fstream>
 string AppConfig::texture_path = "texture.png";
 string AppConfig::levels_path = "levels/";
 string AppConfig::font_name = "prstartk.ttf";

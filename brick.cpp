@@ -15,11 +15,6 @@ Brick::Brick(double x, double y)
     m_state_code = 0;
 }
 
-void Brick::update(Uint32 dt)
-{
-    //không được làm gì cả (không thay đổi collision_rect)
-}
-
 void Brick::bulletHit(Direction bullet_direction)
 {
     int bd = bullet_direction;

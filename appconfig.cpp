@@ -42,7 +42,6 @@ unsigned AppConfig::enemy_redy_time = 500;          // Thời gian chờ kẻ đ
 unsigned AppConfig::player_bullet_max_size = 2;     // Số lượng đạn tối đa người chơi có thể bắn ra cùng lúc
 unsigned AppConfig::score_show_time = 3000;         // Thời gian hiển thị điểm số (miligiây)
 unsigned AppConfig::tank_shield_time = 10000;       // Thời gian xe tăng được bảo vệ (miligiây)
-unsigned AppConfig::tank_frozen_time = 8000;        // Thời gian xe tăng bị đóng băng (miligiây)
 unsigned AppConfig::level_end_time = 1000;          // Thời gian kết thúc màn chơi (miligiây)
 unsigned AppConfig::protect_eagle_time = 15000;     // Thời gian bảo vệ đại bàng (miligiây)
 unsigned AppConfig::player_reload_time = 120;       // Thời gian nạp đạn của người chơi (miligiây)

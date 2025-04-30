@@ -11,9 +11,7 @@ Tank::Tank() //khởi tạo xe tăng ở vị trí và loại mặc định
     default_speed = AppConfig::tank_default_speed;
     speed = 0.0;
     m_shield = nullptr; //khiên bảo vệ
-    m_boat = nullptr; // thuyền
     m_shield_time = 0;
-    m_frozen_time = 0;
 }
 
 Tank::Tank(double x, double y, SpriteType type)
@@ -24,9 +22,7 @@ Tank::Tank(double x, double y, SpriteType type)
     default_speed = AppConfig::tank_default_speed;
     speed = 0.0;
     m_shield = nullptr;
-    m_boat = nullptr;
     m_shield_time = 0;
-    m_frozen_time = 0;
 }
 
 Tank::~Tank()
@@ -39,11 +35,6 @@ Tank::~Tank()
         delete m_shield;
         m_shield = nullptr;
     }
-    if(m_boat != nullptr)
-    {
-        delete m_boat;
-        m_boat = nullptr;
-    }
 }
 
 void Tank::draw()
@@ -52,7 +43,6 @@ void Tank::draw()
     Object::draw();
 
     if(testFlag(TSF_SHIELD) && m_shield != nullptr) m_shield->draw();
-    if(testFlag(TSF_BOAT) && m_boat != nullptr) m_boat->draw();
 
     for(auto bullet : bullets)
         if(bullet != nullptr) bullet->draw();
@@ -63,9 +53,8 @@ void Tank::update(Uint32 dt) //cập nhật vị trí, trạng thái xử lí va
     if(to_erase) return;
     if(testFlag(TSF_LIFE))
     {
-        if(!stop && !testFlag(TSF_FROZEN))
+        if (!stop)
         {
-            // di chuyển xe tăng nếu không bị dừng hoặc bị đóng băng
             switch (direction)
             {
             case D_UP:
@@ -93,17 +82,6 @@ void Tank::update(Uint32 dt) //cập nhật vị trí, trạng thái xử lí va
         collision_rect.h = dest_rect.h - 4;
         collision_rect.w = dest_rect.w - 4;
     }
-    // xử lí trạng thái trượt trên băng
-    if(testFlag(TSF_ON_ICE) && m_slip_time > 0)
-    {
-        m_slip_time -= dt;
-        if(m_slip_time <= 0)
-        {
-            clearFlag(TSF_ON_ICE);
-            m_slip_time = 0;
-            direction = new_direction;
-        }
-    }
     //cập nhật khiên bảo vệ
     if(testFlag(TSF_SHIELD) && m_shield != nullptr)
     {
@@ -113,19 +91,7 @@ void Tank::update(Uint32 dt) //cập nhật vị trí, trạng thái xử lí va
         m_shield->update(dt);
         if(m_shield_time > AppConfig::tank_shield_time) clearFlag(TSF_SHIELD);
     }
-    if(testFlag(TSF_BOAT) && m_boat != nullptr)
-    {
-        m_boat->pos_x = pos_x;
-        m_boat->pos_y = pos_y;
-        m_boat->update(dt);
-    }
-    if(testFlag(TSF_FROZEN))
-    {
-        m_frozen_time += dt;
-        if(m_frozen_time > AppConfig::tank_frozen_time) clearFlag(TSF_FROZEN);
-    }
-
-    if(m_sprite->frames_count > 1 && (testFlag(TSF_LIFE) ? speed > 0 : true)) //brak animacji jeśli czołg nie prógbuje jechać
+    if(m_sprite->frames_count > 1 && (testFlag(TSF_LIFE) ? speed > 0 : true))
     {
         m_frame_display_time += dt;
         if(m_frame_display_time > (testFlag(TSF_MENU)  ? m_sprite->frame_duration / 2 : m_sprite->frame_duration))
@@ -167,7 +133,8 @@ Bullet* Tank::fire() //tạo đạn thêm và danh sách bullets, đặt tốc �
         Bullet* bullet = new Bullet(pos_x, pos_y);
         bullets.push_back(bullet);
 
-        Direction tmp_d = (testFlag(TSF_ON_ICE) ? new_direction : direction);
+        Direction tmp_d = direction;
+
         switch(tmp_d)
         {
         case D_UP:
@@ -235,15 +202,8 @@ SDL_Rect Tank::nextCollisionRect(Uint32 dt)
 void Tank::setDirection(Direction d) //xử lí hướng thay đổi (cả th trượt trên băng)
 {
     if(!(testFlag(TSF_LIFE) || testFlag(TSF_CREATE))) return;
-    if(testFlag(TSF_ON_ICE))
-    {
-        new_direction = d;
-        if(speed == 0.0 || m_slip_time == 0.0) direction = d;
-        if((m_slip_time != 0 && direction == new_direction) || m_slip_time == 0)
-            m_slip_time = AppConfig::slip_time;
-    }
-    else
-        direction = d;
+
+    direction = d;
 
     if(!stop)
     {
@@ -315,22 +275,12 @@ void Tank::destroy() // kích hoạt hiệu ứng nổ và xử lí hồi sinh h
 
 void Tank::setFlag(TankStateFlag flag)
 {
-    if(!testFlag(flag) && flag == TSF_ON_ICE)
-        new_direction = direction;
-
     if(flag == TSF_SHIELD)
     {
         if(m_shield == nullptr) m_shield = new Object(pos_x, pos_y, ST_SHIELD);
          m_shield_time = 0;
     }
-    if(flag == TSF_BOAT)
-    {
-         if(m_boat == nullptr) m_boat = new Object(pos_x, pos_y, type == ST_PLAYER_1 ? ST_BOAT_P1 : ST_BOAT_P2);
-    }
-    if(flag == TSF_FROZEN)
-    {
-        m_frozen_time = 0;
-    }
+
     m_flags |= flag;
 }
 
@@ -342,15 +292,7 @@ void Tank::clearFlag(TankStateFlag flag)
          m_shield = nullptr;
          m_shield_time = 0;
     }
-    if(flag == TSF_BOAT)
-    {
-         if(m_boat != nullptr) delete m_boat;
-         m_boat = nullptr;
-    }
-    if(flag == TSF_FROZEN)
-    {
-        m_frozen_time = 0;
-    }
+
     m_flags &= ~flag;
 }
 
@@ -367,7 +309,6 @@ void Tank::respawn() //hiệu ứng hồi sinh đặt lại trạng thái
     m_slip_time = 0;
 
     clearFlag(TSF_SHIELD);
-    clearFlag(TSF_BOAT);
     m_flags = TSF_LIFE;
     update(0);
     m_flags = TSF_CREATE; // Đặt lại tất cả các cờ (flag) khác

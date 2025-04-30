@@ -11,7 +11,7 @@ public:
 
     Brick(double x, double y);
 
-    void update(Uint32 dt);
+    void update(Uint32 dt){}; // không làm gì cả không thay đổi collision_rect
 
     void bulletHit(Direction bullet_direction);
 private:

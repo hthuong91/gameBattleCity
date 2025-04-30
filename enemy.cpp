@@ -85,14 +85,13 @@ void Enemy::update(Uint32 dt)
 
     if(testFlag(TSF_LIFE))
     {
-        src_rect = moveRect(m_sprite->rect, (testFlag(TSF_ON_ICE) ? new_direction : direction) + (lives_count - 1) * 4, m_current_frame);
+        src_rect = moveRect(m_sprite->rect, direction + (lives_count - 1) * 4, m_current_frame);
+
     }
     else
     {
         src_rect = moveRect(m_sprite->rect, 0, m_current_frame);
     }
-
-    if(testFlag(TSF_FROZEN)) return;
 
     m_direction_time += dt;
     m_speed_time += dt;

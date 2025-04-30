@@ -30,7 +30,6 @@ public:
     static unsigned player_bullet_max_size; //số lượng đạn tối đa mà người chơi có thể bắn ra(mặc định)
     static unsigned score_show_time; //thời gian hiển thị điểm số sau khi đếm điểm xong
     static unsigned tank_shield_time; // thời gian hiệu lực lá chắn
-    static unsigned tank_frozen_time; //thời gian kẻ địch bị đóng băng
     static unsigned level_end_time; //thời gian sau khi tiêu diệt dịch sang cửa sổ kết quả
     static unsigned protect_eagle_time; // thời gian lớp bảo vệ bằng đá quanh chim đại bàng
     static unsigned player_reload_time; // thời gian tối thiểu 2 lần bắn đạng của người chơi

@@ -55,12 +55,11 @@ void Player::update(Uint32 dt)
             setDirection(D_RIGHT);
             speed = default_speed;
         }
-        else
+       else
         {
-            if(!testFlag(TSF_ON_ICE) || m_slip_time == 0)
+            if(m_slip_time == 0)
                 speed = 0.0;
         }
-
         if(key_state[player_keys.fire] && m_fire_time > AppConfig::player_reload_time)
         {
             fire();
@@ -71,7 +70,8 @@ void Player::update(Uint32 dt)
     m_fire_time += dt;
 
     if(testFlag(TSF_LIFE))
-        src_rect = moveRect(m_sprite->rect, (testFlag(TSF_ON_ICE) ? new_direction : direction), m_current_frame + 2 * star_count);
+        src_rect = moveRect(m_sprite->rect, direction, m_current_frame + 2 * star_count);
+
     else
         src_rect = moveRect(m_sprite->rect, 0, m_current_frame + 2 * star_count);
 
@@ -112,11 +112,6 @@ void Player::respawn()
 void Player::destroy()
 {
     if(testFlag(TSF_SHIELD)) return;
-    if(testFlag(TSF_BOAT))
-    {
-        clearFlag(TSF_BOAT);
-        return;
-    }
 
     if(star_count == 3)
         changeStarCountBy(-1);

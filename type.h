@@ -16,14 +16,11 @@ enum SpriteType // kiểu dữ liệu đặc biệt định nghĩa các giá tr�
     ST_STONE_WALL,
     ST_WATER,
     ST_BUSH,
-    ST_ICE,
 
     ST_SHIELD,
     ST_CREATE,
     ST_DESTROY_TANK,
     ST_DESTROY_BULLET,
-    ST_BOAT_P1,
-    ST_BOAT_P2,
 
     ST_EAGLE,
     ST_DESTROY_EAGLE,
@@ -43,10 +40,7 @@ enum TankStateFlag
 {
     // định nghĩa các trạng thái của xe tăng
     TSF_SHIELD = 1 << 1,     // Khi nhận được mũ bảo hiểm (trạng thái bảo vệ)
-    TSF_FROZEN = 1 << 2,      // Khi đối phương nhận được đồng hồ (bị đóng băng)
     TSF_DESTROYED = 1 << 3,   // Khi bị trúng bom từ đối phương hoặc bị bắn trúng
-    TSF_BOAT = 1 << 4,        // Khi nhận được thuyền, cho phép đi qua nước
-    TSF_ON_ICE = 1 << 6,      // Nếu xe tăng đang ở trên băng, nó sẽ trượt
     TSF_CREATE = 1 << 7,      // Trạng thái đang tạo xe tăng (hiệu ứng spawn)
     TSF_LIFE = 1 << 8,        // Trạng thái mạng sống (có thể dùng cho player)
     TSF_MENU = 1 << 9         // Tăng tốc độ animation gấp đôi (dùng trong menu)

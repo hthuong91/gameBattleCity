@@ -385,9 +385,7 @@ void Game::loadLevel(const std::string& path)
                 case '#' : obj = new Brick(i * AppConfig::tile_rect.w, j * AppConfig::tile_rect.h); break;
                 case '@' : obj = new Object(i * AppConfig::tile_rect.w, j * AppConfig::tile_rect.h, ST_STONE_WALL); break;
                 case '%' : m_bushes.push_back(new Object(i * AppConfig::tile_rect.w, j * AppConfig::tile_rect.h, ST_BUSH)); obj =  nullptr; break;
-                case '~' : obj = new Object(i * AppConfig::tile_rect.w, j * AppConfig::tile_rect.h, ST_WATER); break;
-                case '-' : obj = new Object(i * AppConfig::tile_rect.w, j * AppConfig::tile_rect.h, ST_ICE); break;
-                default: obj = nullptr;
+                case '~' : obj = new Object(i * AppConfig::tile_rect.w, j * AppConfig::tile_rect.h, ST_WATER); break;                default: obj = nullptr;
                 }
                 row.push_back(obj);
             }
@@ -513,20 +511,12 @@ void Game::checkCollisionTankWithLevel(Tank* tank, Uint32 dt)
             if(tank->stop) break;
             o = m_level.at(i).at(j);
             if(o == nullptr) continue;
-            if(tank->testFlag(TSF_BOAT) && o->type == ST_WATER) continue;
 
             lr = &o->collision_rect;
 
             intersect_rect = intersectRect(lr, &pr);
             if(intersect_rect.w > 0 && intersect_rect.h > 0)
             {
-                if(o->type == ST_ICE)
-                {
-                    if(intersect_rect.w > 10 && intersect_rect.h > 10)
-                       tank->setFlag(TSF_ON_ICE);
-                    continue;
-                }
-                else
                     tank->collide(intersect_rect);
                 break;
             }
@@ -638,7 +628,7 @@ void Game::checkCollisionBulletWithLevel(Bullet* bullet)
         {
             o = m_level.at(i).at(j);
             if(o == nullptr) continue;
-            if(o->type == ST_ICE || o->type == ST_WATER) continue;
+//            if(o->type == ST_ICE || o->type == ST_WATER) continue;
 
             lr = &o->collision_rect;
             intersect_rect = intersectRect(lr, br);

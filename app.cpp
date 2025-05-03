@@ -1,26 +1,34 @@
-
 #include "app.h"
 #include "appconfig.h"
 #include "engine.h"
 #include "game.h"
 #include "menu.h"
-
 #include <ctime>
 #include <iostream>
 #include <stdlib.h>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 App::App()
 {
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        std::cerr << "SDL_mixer could not initialize! Error: " << Mix_GetError() << std::endl;
+        return;
+    }
+
     m_window = nullptr; // khởi tại m_window là con trỏ không troe đến đâu cả
+    Bullet::loadAssets();
+
 }
 
 App::~App()
 {
     if (m_app_state != nullptr)
         delete m_app_state; // giải phóng bộ nhớ của m_app_state nếu nó không phải nullptr
+    Bullet::cleanupAssets();
+
 }
 void App::run()
 {
@@ -29,6 +37,11 @@ void App::run()
     // Khởi tạo SDL và các thư viện
     if(SDL_Init(SDL_INIT_VIDEO) == 0)
     {
+        if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+            std::cerr << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << std::endl;
+            return;
+        }
+
         m_window = SDL_CreateWindow("TANKS", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                   AppConfig::windows_rect.w, AppConfig::windows_rect.h,
                                   SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
@@ -46,6 +59,14 @@ void App::run()
 
         // Khởi tạo trạng thái ban đầu
         m_app_state = new Menu;
+        // thêm nhạc nền game
+        Mix_Music* bgm = Mix_LoadMUS("audio/nhac_nen_game.mp3");
+        if (bgm == nullptr) {
+            std::cerr << "Failed to load background music! Error: " << Mix_GetError() << std::endl;
+        } else {
+            Mix_PlayMusic(bgm, -1); // -1 để lặp vô hạn
+        }
+
 
         // Biến quản lý FPS
         const int TARGET_FPS = 60;
@@ -94,6 +115,11 @@ void App::run()
         // Dọn dẹp
         engine.destroyModules();
     }
+
+    // giải phóng tài nguyên âm thanh
+    Mix_FreeMusic(bgm);
+    bgm = nullptr;
+    Mix_CloseAudio();
 
     // Giải phóng tài nguyên
     SDL_DestroyWindow(m_window);

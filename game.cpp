@@ -628,7 +628,7 @@ void Game::checkCollisionBulletWithLevel(Bullet* bullet)
         {
             o = m_level.at(i).at(j);
             if(o == nullptr) continue;
-//            if(o->type == ST_ICE || o->type == ST_WATER) continue;
+            if(o->type == ST_WATER) continue;
 
             lr = &o->collision_rect;
             intersect_rect = intersectRect(lr, br);
@@ -757,8 +757,11 @@ void Game::checkCollisionTwoBullets(Bullet *bullet1, Bullet *bullet2)
 void Game::nextLevel()
 {
     m_current_level++;
-    if(m_current_level > 35) m_current_level = 1;
-    if(m_current_level < 0) m_current_level = 35;
+    if(m_current_level > 4) {
+        m_finished = true;          // Cờ hiển thị menu (bạn cần có biến này)
+        return;
+    }
+    if(m_current_level < 0) m_current_level = 4;
 
     m_level_start_screen = true;
     m_level_start_time = 0;
@@ -799,18 +802,9 @@ void Game::generateEnemy()
     if(m_enemy_respown_position >= AppConfig::enemy_starting_point.size()) m_enemy_respown_position = 0;
 
     double a, b, c;
-    if(m_current_level <= 17)
-    {
-        a = -0.040625 * m_current_level + 0.940625;
-        b = -0.028125 * m_current_level + 0.978125;
-        c = -0.014375 * m_current_level + 0.994375;
-    }
-    else
-    {
-        a = -0.012778 * m_current_level + 0.467222;
-        b = -0.025000 * m_current_level + 0.925000;
-        c = -0.036111 * m_current_level + 1.363889;
-    }
+    a = -0.040625 * m_current_level + 0.940625;
+    b = -0.028125 * m_current_level + 0.978125;
+    c = -0.014375 * m_current_level + 0.994375;
 
     p = static_cast<float>(rand()) / RAND_MAX;
     if(p < a) e->lives_count = 1;

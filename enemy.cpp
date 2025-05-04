@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <ctime>
 #include <iostream>
-
+#include<SDL_mixer.h>
+;
 Enemy::Enemy()
     : Tank(AppConfig::enemy_starting_point.at(0).x, AppConfig::enemy_starting_point.at(0).y, ST_TANK_A)
 {
@@ -20,8 +21,6 @@ Enemy::Enemy()
 
     m_bullet_max_size = 1;
 
-    m_frozen_time = 0;
-
     if(type == ST_TANK_B)
         default_speed = AppConfig::tank_default_speed * 1.3;
     else
@@ -30,6 +29,8 @@ Enemy::Enemy()
     target_position = {-1, -1};
 
     respawn();
+
+
 }
 
 Enemy::Enemy(double x, double y, SpriteType type)
@@ -47,8 +48,6 @@ Enemy::Enemy(double x, double y, SpriteType type)
     lives_count = 1;
 
     m_bullet_max_size = 1;
-
-    m_frozen_time = 0;
 
     if(type == ST_TANK_B)
         default_speed = AppConfig::tank_default_speed * 1.3;
@@ -170,16 +169,21 @@ void Enemy::update(Uint32 dt)
 }
 
 
+
 void Enemy::destroy()
 {
     lives_count--;
 
-    if(lives_count <= 0)
+    if (lives_count <= 0)
     {
         lives_count = 0;
+
+
+
         Tank::destroy();
     }
 }
+
 
 unsigned Enemy::scoreForHit()
 {

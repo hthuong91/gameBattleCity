@@ -1,7 +1,6 @@
 #include "tank.h"
 #include "appconfig.h"
 #include <algorithm>
-
 Tank::Tank() //khởi tạo xe tăng ở vị trí và loại mặc định
     : Object(AppConfig::enemy_starting_point.at(0).x, AppConfig::enemy_starting_point.at(0).y, ST_TANK_A)
 {
@@ -124,13 +123,16 @@ void Tank::update(Uint32 dt) //cập nhật vị trí, trạng thái xử lí va
     bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](Bullet*b){if(b->to_erase) {delete b; return true;} return false;}), bullets.end());
 }
 
-Bullet* Tank::fire() //tạo đạn thêm và danh sách bullets, đặt tốc độ đạn
+Bullet* Tank::fire()
 {
     if(!testFlag(TSF_LIFE)) return nullptr;
+
     if(bullets.size() < m_bullet_max_size)
     {
-        // Cung cấp một vị trí ban đầu bất kỳ vì chúng ta không biết kích thước của đạn.
-        Bullet* bullet = new Bullet(pos_x, pos_y);
+        // Xác định xe tăng này có phải là người chơi không
+        bool is_player_bullet = (type == ST_PLAYER_1 || type == ST_PLAYER_2);
+
+        Bullet* bullet = new Bullet(pos_x, pos_y, is_player_bullet);
         bullets.push_back(bullet);
 
         Direction tmp_d = direction;
@@ -156,17 +158,21 @@ Bullet* Tank::fire() //tạo đạn thêm và danh sách bullets, đặt tốc �
         }
 
         bullet->direction = tmp_d;
-        if(type == ST_TANK_C)
+
+        if(type == ST_TANK_C || type == ST_PLAYER_2) // giả sử player 2 mạnh hơn
             bullet->speed = AppConfig::bullet_default_speed * 1.3;
         else
             bullet->speed = AppConfig::bullet_default_speed;
 
-        bullet->update(0); // Thay đổi vị trí của dest_rect
+        bullet->update(0); // cập nhật lại dest_rect dựa trên vị trí mới
 
         return bullet;
     }
+
     return nullptr;
 }
+
+
 
 SDL_Rect Tank::nextCollisionRect(Uint32 dt)
 {

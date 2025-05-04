@@ -34,15 +34,14 @@ public:
     Direction direction;
     std::vector<Bullet*> bullets;
     int lives_count;
+
 protected:
     TankStateFlags m_flags;
     Sint32 m_slip_time;
     Direction new_direction;
     unsigned m_bullet_max_size;
     Object* m_shield;
-    Object* m_boat;
     Uint32 m_shield_time;
-    Uint32 m_frozen_time;
 };
 
 #endif // TANK_H

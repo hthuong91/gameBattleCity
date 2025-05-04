@@ -3,6 +3,7 @@
 #include "engine.h"
 #include "game.h"
 #include "menu.h"
+
 #include <ctime>
 #include <iostream>
 #include <stdlib.h>
@@ -119,6 +120,7 @@ void App::run()
     // giải phóng tài nguyên âm thanh
     Mix_FreeMusic(bgm);
     bgm = nullptr;
+
     Mix_CloseAudio();
 
     // Giải phóng tài nguyên

@@ -33,7 +33,7 @@
 1745229524 c:\sdl2\game\wall.h
 	<SDL.h>
 
-1746041371 source:c:\sdl2\game\game.cpp
+1746298940 source:c:\sdl2\game\game.cpp
 	"game.h"
 	"engine.h"
 	"appconfig.h"
@@ -63,11 +63,12 @@
 	"Wall.h"
 	"bullet.h"
 
-1745699361 c:\sdl2\game\bullet.h
+1746285859 c:\sdl2\game\bullet.h
 	<SDL.h>
 	"object.h"
+	<SDL_mixer.h>
 
-1745505389 source:c:\sdl2\game\bullet.cpp
+1746285859 source:c:\sdl2\game\bullet.cpp
 	"bullet.h"
 	"appconfig.h"
 
@@ -90,8 +91,9 @@
 	<SDL_image.h>
 	<string>
 
-1745840532 c:\sdl2\game\app.h
+1746302636 c:\sdl2\game\app.h
 	"appstate.h"
+	<SDL_mixer.h>
 
 1745840646 c:\sdl2\game\appstate.h
 	<SDL_events.h>
@@ -150,7 +152,7 @@
 1745699032 c:\sdl2\game\player.h
 	"tank.h"
 
-1746037963 c:\sdl2\game\tank.h
+1746284101 c:\sdl2\game\tank.h
 	"object.h"
 	"bullet.h"
 	"type.h"
@@ -163,17 +165,18 @@
 1745523901 c:\sdl2\game\bonus.h
 	"object.h"
 
-1746041371 source:c:\sdl2\game\enemy.cpp
+1746331789 source:c:\sdl2\game\enemy.cpp
 	"enemy.h"
 	"appconfig.h"
 	<stdlib.h>
 	<ctime>
 	<iostream>
+	<SDL_mixer.h>
 
 1745504837 c:\sdl2\game\enemy.h
 	"tank.h"
 
-1746040462 source:c:\sdl2\game\menu.cpp
+1746042303 source:c:\sdl2\game\menu.cpp
 	"menu.h"
 	"engine.h"
 	"renderer.h"
@@ -217,12 +220,12 @@
 	<SDL.h>
 	<iostream>
 
-1746040928 source:c:\sdl2\game\tank.cpp
+1746286137 source:c:\sdl2\game\tank.cpp
 	"tank.h"
 	"appconfig.h"
 	<algorithm>
 
-1745840532 source:c:\sdl2\game\app.cpp
+1746331789 source:c:\sdl2\game\app.cpp
 	"app.h"
 	"appconfig.h"
 	"engine.h"
@@ -234,6 +237,7 @@
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
+	<SDL_mixer.h>
 
 1675678514 c:\sdl2\game\\sdl_ttf.h
 	"SDL.h"

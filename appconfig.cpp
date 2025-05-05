@@ -37,7 +37,7 @@ vector<Player::PlayerKeys> AppConfig::player_keys = // các phím điều khiể
 }();
 unsigned AppConfig::level_start_time = 2000;        // Thời gian bắt đầu màn chơi (miligiây)
 unsigned AppConfig::slip_time = 380;                // Thời gian trượt/lướt (miligiây)
-unsigned AppConfig::enemy_start_count = 4;          // Số lượng kẻ địch xuất hiện ban đầu
+unsigned AppConfig::enemy_start_count = 10;         // Số kẻ địch cần tiêu diệt để thắng
 unsigned AppConfig::enemy_redy_time = 500;          // Thời gian chờ kẻ địch sẵn sàng (miligiây)
 unsigned AppConfig::player_bullet_max_size = 2;     // Số lượng đạn tối đa người chơi có thể bắn ra cùng lúc
 unsigned AppConfig::score_show_time = 3000;         // Thời gian hiển thị điểm số (miligiây)
@@ -46,7 +46,7 @@ unsigned AppConfig::level_end_time = 1000;          // Thời gian kết thúc m
 unsigned AppConfig::protect_eagle_time = 15000;     // Thời gian bảo vệ đại bàng (miligiây)
 unsigned AppConfig::player_reload_time = 120;       // Thời gian nạp đạn của người chơi (miligiây)
 
-int AppConfig::enemy_max_count_on_map = 4;          // số lượng kẻ địch cần tiêu diệt để chiến thắng
+int AppConfig::enemy_max_count_on_map = 4;          // Số lượng kẻ địch xuất hiện ban đầu
 
 double AppConfig::game_over_entry_speed = 0.13;     // Tốc độ chuyển cảnh khi kết thúc trò chơi
 double AppConfig::tank_default_speed = 0.08;        // Tốc độ mặc định của xe tăng

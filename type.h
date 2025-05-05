@@ -42,7 +42,7 @@ enum TankStateFlag
     TSF_SHIELD = 1 << 1,     // Khi nhận được mũ bảo hiểm (trạng thái bảo vệ)
     TSF_DESTROYED = 1 << 3,   // Khi bị trúng bom từ đối phương hoặc bị bắn trúng
     TSF_CREATE = 1 << 7,      // Trạng thái đang tạo xe tăng (hiệu ứng spawn)
-    TSF_LIFE = 1 << 8,        // Trạng thái mạng sống (có thể dùng cho player)
+    TSF_LIFE = 1 << 8,        // Trạng thái mạng sống
     TSF_MENU = 1 << 9         // Tăng tốc độ animation gấp đôi (dùng trong menu)
 };
 
